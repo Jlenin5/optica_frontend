@@ -1,0 +1,269 @@
+@use "../abstracts/tokens" as *;
+
+.header {
+  height: $header-height;
+  flex: 0 0 $header-height;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: 0 $space-6;
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  background: rgba($bg-surface, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid $border-color;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    min-width: 0;
+  }
+  &__menu-btn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-secondary;
+    cursor: pointer;
+    transition:
+      background $transition-fast,
+      border-color $transition-fast,
+      color $transition-fast;
+    &:hover {
+      background: rgba($color-primary, 0.06);
+      border-color: $color-primary-light;
+      color: $color-primary;
+    }
+  }
+  &__heading {
+    min-width: 0;
+  }
+  &__eyebrow {
+    display: block;
+    color: $text-muted;
+    font-size: 9px;
+    line-height: 1;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  &__heading h1 {
+    margin: 4px 0 0;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    line-height: 1.1;
+    font-weight: $font-weight-bold;
+  }
+  &__context {
+    margin-left: auto;
+    min-width: 0;
+  }
+  &__context-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-muted;
+    font-size: $font-size-xs;
+    white-space: nowrap;
+  }
+  &__right {
+    position: relative;
+  }
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 5px 7px 5px 5px;
+    border: 1px solid transparent;
+    border-radius: $radius-lg;
+    background: transparent;
+    cursor: pointer;
+    &:hover {
+      background: $bg-subtle;
+      border-color: $border-color;
+    }
+  }
+  &__user-avatar {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: rgba($color-primary, 0.1);
+    color: $color-primary;
+  }
+  &__user-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 80px;
+  }
+  &__user-name {
+    color: $text-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+  }
+  &__user-role {
+    margin-top: 2px;
+    color: $text-muted;
+    font-size: 9px;
+    text-transform: capitalize;
+  }
+  &__chevron {
+    color: $text-muted;
+    transition: transform $transition-fast;
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: min(320px, calc(100vw - 20px));
+  padding: 9px;
+  background: $bg-surface;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  z-index: $z-popover;
+  &__header {
+    padding: $space-2;
+  }
+  &__user {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  &__user-avatar {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: rgba($color-primary, 0.1);
+    color: $color-primary;
+    flex: 0 0 42px;
+  }
+  &__user-info {
+    min-width: 0;
+  }
+  &__name,
+  &__email,
+  &__company {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__name {
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+  &__email {
+    margin-top: 2px;
+    color: $text-muted;
+    font-size: 10px;
+  }
+  &__company {
+    margin-top: 4px;
+    color: $color-primary;
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+  }
+  &__divider {
+    height: 1px;
+    margin: $space-2 0;
+    background: $border-color;
+  }
+  &__section {
+    display: grid;
+    gap: 2px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: $radius-md;
+    background: transparent;
+    color: $text-secondary;
+    text-align: left;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    &:hover {
+      background: $bg-subtle;
+      color: $text-primary;
+    }
+    &--danger {
+      color: $color-danger;
+      &:hover {
+        background: rgba($color-danger, 0.07);
+        color: $color-danger-dark;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .header {
+    height: 60px;
+    flex-basis: 60px;
+    padding: 0 $space-3;
+    gap: $space-2;
+  }
+  .header__heading h1 {
+    font-size: $font-size-sm;
+  }
+  .header__eyebrow,
+  .header__context {
+    display: none;
+  }
+  .header__user {
+    padding: 3px;
+  }
+  .header__chevron {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .header {
+    padding: 0 9px;
+  }
+  .header__heading h1 {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.header {
+  position: relative;
+  z-index: $z-sticky;
+  box-shadow: 0 1px 0 rgba($color-black, .02);
+  &__mode { margin-left: auto; }
+  &__mode-btn { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 10px; border: 1px solid $border-color; border-radius: 999px; background: $bg-surface; color: $text-secondary; font-size: 11px; font-weight: $font-weight-semibold; cursor: pointer; }
+  &__mode-btn--demo { color: $color-primary; background: rgba($color-primary, .06); border-color: rgba($color-primary, .18); }
+  &__mode-btn--production { color: $color-success; background: rgba($color-success, .06); border-color: rgba($color-success, .18); }
+}
+@media (max-width: $breakpoint-md) { .header__mode-btn span { display: none; } .header__mode { margin-left: auto; } }

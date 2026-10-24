@@ -1,0 +1,1063 @@
+// styles/subscriptions.scss
+@use '../abstracts/tokens' as *;
+
+.subscriptions-page {
+  padding: 24px;
+  background: $bg-page;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__header-left {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: $color-gray-500;
+    margin: 0;
+  }
+
+  &__add-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba($primary, 0.2);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba($primary, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &__add-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__content {
+    margin-top: 24px;
+  }
+
+  &__load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  &__load-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: white;
+    border: 1px solid $color-gray-200;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: $primary;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba($primary, 0.05);
+      border-color: $primary;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba($primary, 0.3);
+    border-top-color: $primary;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+  }
+}
+
+// Stats Cards
+.subscription-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+
+  &__card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid $color-gray-200;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.1);
+      border-color: transparent;
+    }
+  }
+
+  &__card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__card-info {
+    flex: 1;
+  }
+
+  &__card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: $color-gray-500;
+    margin: 0 0 4px 0;
+  }
+
+  &__card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-gray-900;
+    margin: 0;
+  }
+}
+
+// Filters
+.subscription-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+
+  &__search {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+
+    svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $color-gray-400;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px 10px 40px;
+      border: 1px solid $color-gray-200;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__select {
+    padding: 8px 32px 8px 12px;
+    border: 1px solid $color-gray-200;
+    border-radius: 10px;
+    font-size: 14px;
+    color: $color-gray-700;
+    background: white;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+  }
+
+  &__view-toggle {
+    display: flex;
+    gap: 4px;
+    background: $color-gray-100;
+    padding: 4px;
+    border-radius: 10px;
+  }
+
+  &__view-btn {
+    padding: 6px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    color: $color-gray-500;
+    transition: all 0.2s;
+
+    &:hover {
+      background: white;
+      color: $primary;
+    }
+
+    &--active {
+      background: white;
+      color: $primary;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+// Grid y List containers
+.subscriptions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+.subscriptions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// Subscription Card
+.subscription-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid $color-gray-200;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+  }
+
+  &--list {
+    .subscription-card__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .subscription-card__body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .subscription-card__dates {
+      flex-direction: row;
+      gap: 24px;
+    }
+
+    .subscription-card__footer {
+      margin-top: 0;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  &__company {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+  }
+
+  &__company-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($primary-dark, 0.1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary;
+    flex-shrink: 0;
+  }
+
+  &__company-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 4px 0;
+  }
+
+  &__company-ruc {
+    font-size: 12px;
+    color: $color-gray-500;
+    font-family: monospace;
+  }
+
+  &__plan {
+    text-align: right;
+  }
+
+  &__plan-info {
+    text-align: left;
+  }
+
+  &__plan-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $primary;
+    display: block;
+  }
+
+  &__plan-code {
+    font-size: 11px;
+    color: $color-gray-400;
+    font-family: monospace;
+  }
+
+  &__plan-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: $color-gray-900;
+  }
+
+  &__plan-cycle {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-gray-500;
+  }
+
+  &__status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  &__dates {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: $color-gray-500;
+
+    svg {
+      color: $color-gray-400;
+    }
+  }
+
+  &__days-remaining {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba($primary, 0.1);
+    color: $primary;
+
+    &--warning {
+      background: rgba($color-warning, 0.1);
+      color: $color-warning;
+    }
+
+    &--expired {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid $color-gray-100;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &--cancel {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+
+      &:hover {
+        background: rgba($color-danger, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &--renew {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+
+      &:hover {
+        background: rgba($color-success, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &--cancel {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+
+      &:hover {
+        background: rgba($color-danger, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &--renew {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+
+      &:hover {
+        background: rgba($color-success, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+  }
+}
+
+// Subscription Form
+.subscription-form {
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    gap: 16px;
+
+    p {
+      color: $color-gray-500;
+      font-size: 14px;
+    }
+  }
+
+  &__section {
+    margin-bottom: 24px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  &__field {
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: $color-gray-700;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid $color-gray-200;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+      }
+
+      &.error {
+        border-color: $color-danger;
+        
+        &:focus {
+          box-shadow: 0 0 0 3px rgba($color-danger, 0.1);
+        }
+      }
+
+      &:read-only {
+        background: $color-gray-50;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__plan-info {
+    margin: -10px 0 20px 0;
+  }
+
+  &__plan-description {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba($primary, 0.05);
+    border-radius: 8px;
+    font-size: 13px;
+    color: $color-gray-500;
+
+    svg {
+      color: $primary;
+    }
+  }
+
+  &__helper {
+    font-size: 12px;
+    color: $color-gray-500;
+    margin: 4px 0 0 0;
+  }
+
+  &__error {
+    font-size: 12px;
+    color: $color-danger;
+    margin-top: 4px;
+    display: block;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid $color-gray-200;
+  }
+
+  &__cancel {
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid $color-gray-200;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-gray-500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $color-gray-50;
+      border-color: $color-gray-300;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba($primary, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+// Subscription Skeleton
+.subscription-skeleton {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid $color-gray-200;
+  animation: pulse 1.5s ease-in-out infinite;
+
+  &--list {
+    .subscription-skeleton__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .subscription-skeleton__body {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__company {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    background: $color-gray-200;
+    border-radius: 12px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__plan {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  &__body {
+    margin: 16px 0;
+  }
+
+  &__dates {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__line {
+    width: 120px;
+    height: 16px;
+    background: $color-gray-200;
+    border-radius: 4px;
+
+    &:nth-child(2) {
+      width: 80px;
+    }
+  }
+
+  &__badge {
+    width: 80px;
+    height: 28px;
+    background: $color-gray-200;
+    border-radius: 20px;
+  }
+
+  &__button {
+    width: 100px;
+    height: 36px;
+    background: $color-gray-200;
+    border-radius: 8px;
+  }
+
+  &__footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid $color-gray-200;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+// Modal
+/* Modal shell centralizado en components/_modal.scss */
+
+/* Modal shell centralizado en components/_modal.scss */
+
+// Empty State
+.subscriptions-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  padding: 48px;
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    color: $color-gray-300;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $color-gray-500;
+    margin: 0 0 24px 0;
+  }
+
+  &__button {
+    padding: 10px 24px;
+    background: $primary;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $primary-dark;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .subscriptions-page {
+    padding: 16px;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__add-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .subscription-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .subscriptions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .subscription-card--list {
+    .subscription-card__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .subscription-card__body {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .subscription-card__dates {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .subscription-card__footer {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+
+  .subscriptions-modal {
+    width: 95%;
+    margin: 16px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.subscription-card {
+  // ... estilos existentes
+
+  &__days-remaining {
+    &--trial {
+      background: rgba($color-secondary, 0.1);
+      color: $color-secondary;
+    }
+
+    &--past-due {
+      background: rgba($color-warning, 0.1);
+      color: $color-warning;
+    }
+
+    &--warning {
+      background: rgba($color-warning, 0.2);
+      color: $color-warning;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  }
+
+  &__action {
+    &--activate {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+
+      &:hover {
+        background: rgba($color-success, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &--renew {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+
+      &:hover {
+        background: rgba($color-success, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__btn {
+    &--activate {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+
+      &:hover {
+        background: rgba($color-success, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &--renew {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+
+      &:hover {
+        background: rgba($color-success, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

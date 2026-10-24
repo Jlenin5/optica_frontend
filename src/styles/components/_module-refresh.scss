@@ -1,0 +1,596 @@
+@use "../abstracts/tokens" as *;
+
+/* -------------------------------------------------------------------------- */
+/* Facil ERP — shared module UI refresh                                      */
+/* -------------------------------------------------------------------------- */
+
+.module-page,
+[class$="-page"],
+.lab-page,
+.sales-page,
+.products-page,
+.patients-page,
+.users-page,
+.roles-page {
+  min-width: 0;
+  color: $text-primary;
+}
+
+/* Headers: compact, consistent and easier to scan. */
+.module-page__header,
+[class$="-page__header"] {
+  min-height: 48px;
+  margin-bottom: 2px;
+}
+
+[class$="-page__title"],
+.module-page__title {
+  letter-spacing: -0.02em;
+}
+
+[class$="-page__count"],
+[class*="__count"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  padding: 0 7px;
+  border: 1px solid $border-color;
+  border-radius: $radius-full;
+  background: $bg-subtle;
+  color: $text-muted;
+  font-size: 11px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Filters                                                                    */
+/* -------------------------------------------------------------------------- */
+
+/* Every module gets the same filter shell. Nested left/right wrappers are
+   flattened into the grid so old module-specific markup can share one UX. */
+[class$="-filters"] {
+  display: grid !important;
+  grid-template-columns: minmax(280px, 1.55fr) repeat(auto-fit, minmax(150px, 1fr));
+  align-items: end;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 16px !important;
+  padding: 14px !important;
+  border: 1px solid $border-color !important;
+  border-radius: $radius-lg !important;
+  background: $bg-surface !important;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.045) !important;
+}
+
+[class$="-filters"] > [class*="__left"],
+[class$="-filters"] > [class*="__right"],
+[class$="-filters"] > [class*="__grid"],
+[class$="-filters"] > [class*="__actions"] {
+  display: contents !important;
+}
+
+[class$="-filters"] [class*="__field"] {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+[class$="-filters"] [class*="__label"] {
+  display: block;
+  margin: 0 0 1px;
+  color: $text-secondary;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+}
+
+/* Search control — icon is centered over the input instead of participating
+   in the input's text flow. This fixes the misaligned icon problem. */
+[class$="-filters"] [class*="__search"],
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 42px;
+  width: 100%;
+  border: 1px solid $border-medium;
+  border-radius: $radius-md;
+  background: $bg-surface;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+}
+
+[class$="-filters"] [class*="__search"]:focus-within,
+.input-wrapper:focus-within {
+  border-color: $color-primary-light;
+  box-shadow: 0 0 0 3px rgba($color-primary, 0.09);
+}
+
+[class$="-filters"] [class*="__search"] > svg:first-child,
+.lab-search > svg:first-child,
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  z-index: 2;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+  pointer-events: none;
+}
+
+[class$="-filters"] [class*="__search"] input,
+.lab-search input,
+.input-wrapper input {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 40px !important;
+  margin: 0 !important;
+  padding: 9px 38px 9px 40px !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  color: $text-primary;
+}
+
+[class$="-filters"] [class*="__search"]:not(:has(> svg)) input {
+  padding-left: 40px !important;
+  // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: 12px center !important;
+}
+
+[class$="-filters"] [class*="__search"] input::placeholder,
+.lab-search input::placeholder {
+  color: #94a3b8;
+}
+
+[class$="-filters"] [class*="__search"] button,
+.lab-search button {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: $text-tertiary;
+  cursor: pointer;
+}
+
+[class$="-filters"] [class*="__search"] button:hover,
+.lab-search button:hover {
+  background: $bg-muted;
+  color: $text-primary;
+}
+
+[class$="-filters"] select,
+[class$="-filters"] input:not([type="checkbox"]):not([type="radio"]),
+[class$="-filters"] textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  margin: 0 !important;
+  // padding: 9px 34px 9px 12px !important;
+  border: 1px solid $border-color !important;
+  border-radius: $radius-md !important;
+  background-color: $bg-surface !important;
+  color: $text-primary;
+  font-size: 13px;
+  box-shadow: none !important;
+}
+
+[class$="-filters"] select:focus,
+[class$="-filters"] input:not([type="checkbox"]):not([type="radio"]):focus,
+[class$="-filters"] textarea:focus {
+  border-color: $color-primary-light !important;
+  box-shadow: 0 0 0 3px rgba($color-primary, 0.09) !important;
+  outline: 0 !important;
+}
+
+[class$="-filters"] select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364758b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 11px center !important;
+}
+
+[class$="-filters"] [class*="__date-range"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+[class$="-filters"] [class*="__results"] {
+  align-self: center;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid $border-color;
+  border-radius: $radius-full;
+  background: $bg-subtle;
+  color: $text-muted;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+[class$="-filters"] [class*="__clear"],
+[class$="-filters"] [class*="__clear-btn"] {
+  min-height: 40px;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 13px;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  background: $bg-surface;
+  color: $text-secondary;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background $transition-fast, border-color $transition-fast, color $transition-fast;
+}
+
+[class$="-filters"] [class*="__clear"]:hover,
+[class$="-filters"] [class*="__clear-btn"]:hover {
+  border-color: $border-medium;
+  background: $bg-muted;
+  color: $text-primary;
+}
+
+/* View toggles are intentionally removed: ERP lists use one consistent table
+   interaction model across modules. */
+[class$="-filters"] [class*="__view-toggle"] {
+  display: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tables                                                                     */
+/* -------------------------------------------------------------------------- */
+
+.ui-table-container,
+[class$="-table"],
+[class*="-table-container"],
+[class*="-table-card__content"],
+.lab-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid $border-color !important;
+  border-radius: $radius-lg !important;
+  background: $bg-surface !important;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.045) !important;
+}
+
+.ui-table-container table,
+[class$="-table"] table,
+[class*="-table"] table,
+[class*="-table-container"] table,
+[class*="-table-card__content"] table,
+.lab-table-container table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  font-size: 13px;
+}
+
+.ui-table-container thead th,
+[class$="-table"] thead th,
+[class*="-table"] thead th,
+[class*="-table-container"] thead th,
+[class*="-table-card__content"] thead th,
+.lab-table-container thead th {
+  height: 44px;
+  padding: 0 15px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid $border-color !important;
+  color: #64748b !important;
+  font-size: 10.5px !important;
+  font-weight: 750 !important;
+  letter-spacing: 0.065em;
+  line-height: 1;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ui-table-container tbody td,
+[class$="-table"] tbody td,
+[class*="-table"] tbody td,
+[class*="-table-container"] tbody td,
+[class*="-table-card__content"] tbody td,
+.lab-table-container tbody td {
+  min-height: 56px;
+  padding: 13px 15px !important;
+  border-bottom: 1px solid #edf1f5 !important;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.ui-table-container tbody tr,
+[class$="-table"] tbody tr,
+[class*="-table"] tbody tr,
+[class*="-table-container"] tbody tr,
+[class*="-table-card__content"] tbody tr,
+.lab-table-container tbody tr {
+  transition: background $transition-fast;
+}
+
+.ui-table-container tbody tr:hover,
+[class$="-table"] tbody tr:hover,
+[class*="-table"] tbody tr:hover,
+[class*="-table-container"] tbody tr:hover,
+[class*="-table-card__content"] tbody tr:hover,
+.lab-table-container tbody tr:hover {
+  background: #f8fbff !important;
+}
+
+.ui-table-container tbody tr:last-child td,
+[class$="-table"] tbody tr:last-child td,
+[class*="-table"] tbody tr:last-child td,
+[class*="-table-container"] tbody tr:last-child td,
+[class*="-table-card__content"] tbody tr:last-child td,
+.lab-table-container tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+/* Common action buttons in tables. */
+[class$="-table"] button,
+[class*="-table-container"] button,
+.ui-table-container button,
+.lab-table-container button {
+  transition: background $transition-fast, color $transition-fast, border-color $transition-fast;
+}
+
+[class$="-table"] button[class*="icon"],
+[class$="-table"] button[class*="__action"],
+[class*="-table"] button[class*="icon"],
+[class*="-table"] button[class*="__action"],
+[class*="-table-container"] button[class*="icon"],
+[class*="-table-container"] button[class*="__action"],
+[class*="-table-card__content"] button[class*="__action"],
+.ui-table-container button[class*="icon"],
+.ui-table-container button[class*="__action"],
+.lab-icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+}
+
+[class$="-table"] button[class*="icon"]:hover,
+[class$="-table"] button[class*="__action"]:hover,
+[class*="-table"] button[class*="icon"]:hover,
+[class*="-table"] button[class*="__action"]:hover,
+[class*="-table-container"] button[class*="icon"]:hover,
+[class*="-table-container"] button[class*="__action"]:hover,
+[class*="-table-card__content"] button[class*="__action"]:hover,
+.ui-table-container button[class*="icon"]:hover,
+.ui-table-container button[class*="__action"]:hover,
+.lab-icon-btn:hover {
+  border-color: $border-color;
+  background: $bg-muted;
+  color: $text-primary;
+}
+
+/* Table-card search bars (used by roles and a few legacy screens). */
+[class*="-table-card"] [class*="__toolbar"],
+[class*="-table-card"] [class*="__search"] {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+[class*="-table-card"] [class*="__search"] {
+  position: relative;
+  width: min(100%, 360px);
+  min-height: 40px;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  background: $bg-surface;
+}
+
+[class*="-table-card"] [class*="__search"] .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+  pointer-events: none;
+}
+
+[class*="-table-card"] [class*="__search"] input {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px 8px 40px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent;
+}
+
+[class*="-table-card"] [class*="__search"]:focus-within {
+  border-color: $color-primary-light;
+  box-shadow: 0 0 0 3px rgba($color-primary, 0.09);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Pagination                                                                 */
+/* -------------------------------------------------------------------------- */
+
+.module-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px rgba(15,23,42,.035);
+}
+
+.module-pagination__summary > span:first-child {
+  font-weight: 600;
+}
+
+.module-pagination__summary select {
+  min-height: 34px;
+  min-width: 68px;
+  padding: 6px 28px 6px 10px !important;
+  border: 1px solid $border-color !important;
+  border-radius: 8px !important;
+  background: $bg-surface !important;
+  font-size: 12px;
+}
+.module-pagination__summary,
+.module-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-muted);
+  font-size: 12.5px;
+}
+
+.module-pagination__controls > button,
+.module-pagination__page-wrap > button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  background: $bg-surface;
+  color: $text-secondary;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.module-pagination__controls > button:hover:not(:disabled),
+.module-pagination__page-wrap > button:hover:not(:disabled) {
+  border-color: $border-medium;
+  background: $bg-muted;
+}
+
+.module-pagination__page-wrap > button.is-active {
+  border-color: $color-primary;
+  background: $color-primary;
+  color: $white;
+  box-shadow: 0 3px 8px rgba($color-primary, 0.2);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Forms                                                                      */
+/* -------------------------------------------------------------------------- */
+
+.ui-field input,
+.ui-field select,
+.ui-field textarea,
+[class*="__field"] > input,
+[class*="__field"] > select,
+[class*="__field"] > textarea,
+.form-input,
+.form-select,
+.form-textarea,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]),
+select,
+textarea {
+  min-height: 40px;
+  border: 1px solid $border-color !important;
+  border-radius: $radius-md !important;
+  background: $bg-surface;
+  color: $text-primary;
+  box-shadow: none;
+}
+
+.ui-field input:focus,
+.ui-field select:focus,
+.ui-field textarea:focus,
+[class*="__field"] > input:focus,
+[class*="__field"] > select:focus,
+[class*="__field"] > textarea:focus,
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):focus,
+select:focus,
+textarea:focus {
+  border-color: $color-primary-light !important;
+  box-shadow: 0 0 0 3px rgba($color-primary, 0.09) !important;
+  outline: 0 !important;
+}
+
+[class*="__field"] > label,
+.ui-field > label,
+.form-field > label {
+  margin-bottom: 5px;
+  color: $text-secondary;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+/* Responsive filter/table behavior. */
+@media (max-width: 900px) {
+  [class$="-filters"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  [class$="-filters"] [class*="__search"] {
+    grid-column: 1 / -1;
+  }
+
+  [class$="-filters"] [class*="__clear"],
+  [class$="-filters"] [class*="__clear-btn"] {
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 600px) {
+  [class$="-filters"] {
+    grid-template-columns: 1fr;
+    padding: 12px !important;
+  }
+
+  [class$="-filters"] [class*="__date-range"] {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .module-pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .module-pagination__controls {
+    justify-content: flex-end;
+  }
+}

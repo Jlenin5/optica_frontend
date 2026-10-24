@@ -1,0 +1,86 @@
+.autocomplete-input {
+  position: relative;
+  width: 100%;
+}
+.autocomplete-input__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.autocomplete-input__control > input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 38px;
+  border: 1px solid var(--border-color, #d9dee8);
+  border-radius: 8px;
+  background: var(--surface-color, #fff);
+  color: var(--text-color, #1f2937);
+  outline: none;
+}
+.autocomplete-input__control > input:focus {
+  border-color: var(--primary-color, #2563eb);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--primary-color, #2563eb) 14%, transparent);
+}
+.autocomplete-input__icon {
+  position: absolute;
+  left: 12px;
+  z-index: 1;
+  pointer-events: none;
+  color: var(--text-muted-color, #6b7280);
+}
+.autocomplete-input__clear {
+  position: absolute;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted-color, #6b7280);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.autocomplete-input__clear:hover {
+  background: var(--surface-hover-color, #f3f4f6);
+}
+.autocomplete-input__dropdown {
+  position: absolute;
+  z-index: 1000;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid var(--border-color, #d9dee8);
+  border-radius: 8px;
+  background: var(--surface-color, #fff);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
+}
+.autocomplete-input__option {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.autocomplete-input__option:hover,
+.autocomplete-input__option.is-active {
+  background: var(--surface-hover-color, #f3f4f6);
+}
+.autocomplete-input__state {
+  padding: 12px;
+  color: var(--text-muted-color, #6b7280);
+  text-align: center;
+  font-size: 0.875rem;
+}
+.autocomplete-input--input-register .autocomplete-input__option {
+  min-height: 42px;
+}

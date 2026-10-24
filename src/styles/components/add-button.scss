@@ -1,0 +1,44 @@
+@use "../abstracts/tokens" as *;
+
+.add-button,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  background: $color-primary;
+  color: $white;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background $transition-fast,
+    border-color $transition-fast,
+    color $transition-fast,
+    box-shadow $transition-fast,
+    transform $transition-fast;
+  &:hover:not(:disabled) {
+    background: $color-primary-dark;
+  }
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+.add-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: $color-danger;
+  color: $white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+}

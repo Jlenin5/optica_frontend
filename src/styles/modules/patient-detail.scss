@@ -1,0 +1,789 @@
+@use '../abstracts/tokens' as *;
+
+.patient-detail-page {
+  padding: 24px;
+  min-height: 100vh;
+  background: $bg-page;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid $color-gray-200;
+  }
+
+  &__back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid $color-gray-200;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: $color-gray-500;
+
+    &:hover {
+      background: $primary;
+      color: white;
+      border-color: $primary;
+      transform: translateX(-2px);
+    }
+  }
+
+  &__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+  }
+
+  &__info {
+    flex: 1;
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-gray-900;
+      margin: 0 0 12px 0;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: $color-gray-500;
+
+    svg {
+      color: $primary;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid $color-gray-200;
+    padding-bottom: 0;
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-gray-500;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+
+    &:hover {
+      color: $primary;
+    }
+
+    &.active {
+      color: $primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: $primary;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  &__badge {
+    background: $color-gray-100;
+    color: $color-gray-500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  &__content {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid $color-gray-200;
+    overflow: hidden;
+  }
+
+  &__info-section,
+  &__prescriptions-section,
+  &__appointments-section {
+    padding: 24px;
+  }
+}
+
+.info-card {
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $color-gray-200;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: $color-gray-400;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-gray-900;
+      margin: 0;
+    }
+  }
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0;
+  }
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: $primary;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $primary-dark;
+    transform: translateY(-1px);
+  }
+}
+
+.text-muted {
+  color: $color-gray-400;
+  text-align: center;
+  padding: 40px;
+}
+
+.patient-detail-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: $bg-page;
+
+  &__content {
+    text-align: center;
+    padding: 48px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: $color-gray-900;
+      margin: 0 0 16px 0;
+    }
+
+    button {
+      padding: 10px 24px;
+      background: $primary;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background: $primary-dark;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.patient-prescriptions-page {
+  &__content {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid $color-gray-200;
+    overflow: hidden;
+    padding: 24px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__title-section {
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: $color-gray-900;
+      margin: 0 0 4px 0;
+    }
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: $color-gray-500;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__view-toggle {
+    display: flex;
+    gap: 4px;
+    background: $color-gray-100;
+    padding: 4px;
+    border-radius: 10px;
+
+    .view-toggle-btn {
+      padding: 6px 10px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      color: $color-gray-500;
+      transition: all 0.2s;
+
+      &:hover {
+        background: white;
+        color: $primary;
+      }
+
+      &.active {
+        background: white;
+        color: $primary;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}
+
+// Prescriptions Grid
+.prescriptions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+// Prescription Card
+.prescription-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid $color-gray-200;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: $color-gray-50;
+    border-bottom: 1px solid $color-gray-200;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: $color-gray-500;
+  }
+
+  &__badges {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 500;
+
+    &--appointment {
+      background: rgba($color-secondary, 0.1);
+      color: $color-secondary;
+    }
+
+    &--active {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+    }
+
+    &--inactive {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+    }
+  }
+
+  &__body {
+    padding: 16px;
+  }
+
+  &__eyes {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  &__eye {
+    flex: 1;
+    background: $color-gray-50;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  &__eye-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: $primary;
+    margin-bottom: 8px;
+  }
+
+  &__eye-values {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    color: $color-gray-700;
+  }
+
+  &__notes {
+    font-size: 12px;
+    color: $color-gray-500;
+    padding: 8px 12px;
+    background: $color-gray-50;
+    border-radius: 8px;
+    margin-top: 12px;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px 16px;
+    border-top: 1px solid $color-gray-100;
+  }
+
+  &__btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &--view {
+      background: rgba($color-primary, 0.1);
+      color: $color-primary;
+
+      &:hover {
+        background: rgba($color-primary, 0.2);
+      }
+    }
+
+    &--edit {
+      background: rgba($primary, 0.1);
+      color: $primary;
+
+      &:hover {
+        background: rgba($primary, 0.2);
+      }
+    }
+
+    &--status {
+      &.active {
+        background: rgba($color-warning, 0.1);
+        color: $color-warning;
+
+        &:hover {
+          background: rgba($color-warning, 0.2);
+        }
+      }
+
+      &.inactive {
+        background: rgba($color-success, 0.1);
+        color: $color-success;
+
+        &:hover {
+          background: rgba($color-success, 0.2);
+        }
+      }
+    }
+
+    &--delete {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+
+      &:hover {
+        background: rgba($color-danger, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+// Prescriptions Empty
+.prescriptions-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+
+  svg {
+    color: $color-gray-300;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: $color-gray-500;
+    margin: 0 0 24px 0;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .patient-prescriptions-page {
+    &__header {
+      flex-direction: column;
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  .prescriptions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prescription-card {
+    &__eyes {
+      flex-direction: column;
+    }
+
+    &__footer {
+      flex-wrap: wrap;
+    }
+
+    &__btn {
+      flex: 1;
+      min-width: calc(25% - 6px);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.patient-appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patient-appointment-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid $color-gray-200;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: $primary;
+  }
+
+  &__date {
+    text-align: center;
+    min-width: 60px;
+    padding: 8px;
+    background: $color-gray-50;
+    border-radius: 10px;
+  }
+
+  &__day {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-gray-900;
+    line-height: 1;
+  }
+
+  &__month {
+    font-size: 11px;
+    color: $color-gray-500;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  &__time {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: $color-gray-500;
+  }
+
+  &__today-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    background: rgba($color-success, 0.1);
+    color: $color-success;
+    border-radius: 12px;
+  }
+
+  &__past-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    background: rgba($color-danger, 0.1);
+    color: $color-danger;
+    border-radius: 12px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__optometrist,
+  &__notes {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: $color-gray-500;
+  }
+
+  &__notes {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__status {
+    min-width: 100px;
+    text-align: right;
+  }
+
+  &__status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  &__arrow {
+    color: $color-gray-400;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover &__arrow {
+    opacity: 1;
+  }
+}
+
+.patient-appointments-empty {
+  text-align: center;
+  padding: 48px;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid $color-gray-200;
+
+  svg {
+    color: $color-gray-400;
+    margin-bottom: 16px;
+  }
+
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $color-gray-500;
+    margin: 0;
+  }
+}
+
+.patient-appointments-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  gap: 16px;
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid $color-gray-200;
+    border-top-color: $primary;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  p {
+    color: $color-gray-500;
+  }
+}

@@ -1,0 +1,291 @@
+@use "../abstracts/tokens" as *;
+
+.app-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal-backdrop;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-5;
+  background: rgba($color-gray-900, 0.52);
+  backdrop-filter: blur(5px);
+  animation: app-modal-fade $transition-base;
+}
+
+.app-modal {
+  width: min($modal-max-width, 100%);
+  max-height: min(90vh, 860px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: $bg-surface;
+  border: 1px solid $border-color;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  animation: app-modal-enter $transition-base;
+
+  &--sm {
+    width: min(480px, 100%);
+  }
+  &--lg {
+    width: min($modal-max-width-lg, 100%);
+  }
+
+  &__header {
+    flex: 0 0 auto;
+    min-height: 68px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $space-4;
+    padding: $space-5 $space-6;
+    border-bottom: 1px solid $border-color;
+    background: $bg-surface;
+  }
+
+  &__heading {
+    min-width: 0;
+  }
+  &__title {
+    margin: 0;
+    color: $text-primary;
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    line-height: 1.3;
+  }
+  &__description {
+    margin: 5px 0 0;
+    color: $text-muted;
+    font-size: $font-size-xs;
+    line-height: 1.45;
+  }
+
+  &__close {
+    flex: 0 0 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-muted;
+    cursor: pointer;
+    transition:
+      background $transition-fast,
+      color $transition-fast,
+      border-color $transition-fast;
+    &:hover:not(:disabled) {
+      background: $bg-subtle;
+      border-color: $border-medium;
+      color: $text-primary;
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__body {
+    min-height: 0;
+    overflow: auto;
+    padding: $space-6;
+    color: $text-primary;
+  }
+
+  // Common form language shared by every modal.
+  // Form fills the body and pushes action bars to the bottom (sticky).
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    min-height: 100%;
+  }
+  label {
+    color: $text-secondary;
+  }
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    width: 100%;
+    min-height: 38px;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-primary;
+    font: inherit;
+    font-size: $font-size-sm;
+    outline: none;
+    transition:
+      border-color $transition-fast,
+      box-shadow $transition-fast;
+    &:focus {
+      border-color: $color-primary-light;
+      box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    }
+    &:disabled {
+      background: $bg-muted;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  [class*="__field"] {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+  [class*="__label"],
+  [class*="__field"] > label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+  }
+
+  [class*="__actions"],
+  [class*="__footer"] {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: $space-2;
+    position: sticky;
+    padding: $space-4 $space-6;
+    background: $bg-subtle;
+    border-top: 1px solid $border-color;
+    z-index: 1;
+  }
+
+  button {
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-secondary;
+    font: inherit;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition:
+      background $transition-fast,
+      border-color $transition-fast,
+      color $transition-fast,
+      box-shadow $transition-fast,
+      transform $transition-fast;
+    &:hover:not(:disabled) {
+      background: $bg-subtle;
+      border-color: $border-medium;
+      color: $text-primary;
+    }
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+    &.primary,
+    &.submit,
+    &[class*="--primary"],
+    &[class*="--submit"],
+    &[class*="__submit"] {
+      background: $color-primary;
+      border-color: $color-primary;
+      color: $white;
+      &:hover:not(:disabled) {
+        background: $color-primary-dark;
+        border-color: $color-primary-dark;
+        color: $white;
+      }
+    }
+    &.danger,
+    &[class*="--danger"],
+    &[class*="__delete"] {
+      background: $color-danger;
+      border-color: $color-danger;
+      color: $white;
+      &:hover:not(:disabled) {
+        background: $color-danger-dark;
+        border-color: $color-danger-dark;
+        color: $white;
+      }
+    }
+  }
+
+  // Normalize legacy modal action names so old module forms share the same visual language.
+  button[class*="__cancel"],
+  button[class*="__btn--secondary"],
+  button[class*="--secondary"] {
+    background: $bg-surface;
+    border-color: $border-color;
+    color: $text-secondary;
+  }
+  button[class*="__submit"],
+  button[class*="__btn--primary"],
+  button[class*="--primary"] {
+    background: $color-primary;
+    border-color: $color-primary;
+    color: $white;
+    &:hover:not(:disabled) {
+      background: $color-primary-dark;
+      border-color: $color-primary-dark;
+      color: $white;
+    }
+  }
+  button[class*="__delete"],
+  button[class*="--danger"] {
+    background: $color-danger;
+    border-color: $color-danger;
+    color: $white;
+    &:hover:not(:disabled) {
+      background: $color-danger-dark;
+      border-color: $color-danger-dark;
+      color: $white;
+    }
+  }
+}
+
+@keyframes app-modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes app-modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .app-modal-overlay {
+    padding: 10px;
+    align-items: flex-end;
+  }
+  .app-modal {
+    max-height: 94vh;
+    border-radius: $radius-lg $radius-lg 0 0;
+    &__header,
+    &__body {
+      padding: $space-4;
+    }
+    &__footer {
+      padding: $space-3 $space-4;
+    }
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .app-modal-overlay,
+  .app-modal {
+    animation: none !important;
+  }
+}

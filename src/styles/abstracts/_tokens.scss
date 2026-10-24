@@ -1,0 +1,505 @@
+// ============================================================
+// Design system único del ERP
+// ============================================================
+// Este archivo es la única fuente de valores visuales compartidos.
+// Los alias legacy del final apuntan a estos mismos tokens; no duplican colores.
+
+// Brand / semantic colors
+$color-primary: #2563eb;
+$color-primary-dark: #1d4ed8;
+$color-primary-light: #60a5fa;
+$color-primary-darker: #1e40af;
+$color-primary-lighter: #93c5fd;
+
+$color-secondary: #8b5cf6;
+$color-secondary-dark: #7c3aed;
+$color-secondary-light: #a78bfa;
+$color-secondary-darker: #6d28d9;
+$color-secondary-lighter: #c4b5fd;
+
+$color-success: #10b981;
+$color-success-dark: #059669;
+$color-success-light: #34d399;
+$color-success-darker: #047857;
+$color-success-lighter: #6ee7b7;
+
+$color-warning: #f59e0b;
+$color-warning-dark: #d97706;
+$color-warning-light: #fbbf24;
+$color-warning-darker: #b45309;
+$color-warning-lighter: #fcd34d;
+
+$color-danger: #ef4444;
+$color-danger-dark: #dc2626;
+$color-danger-light: #f87171;
+$color-danger-darker: #b91c1c;
+$color-danger-lighter: #fca5a5;
+
+$color-info: #06b6d4;
+$color-info-dark: #0891b2;
+$color-info-light: #22d3ee;
+$color-info-darker: #0e7490;
+$color-info-lighter: #67e8f9;
+
+// Neutrals
+$color-white: #ffffff;
+$color-black: #000000;
+$color-gray-50: #f9fafb;
+$color-gray-100: #f3f4f6;
+$color-gray-200: #e5e7eb;
+$color-gray-300: #d1d5db;
+$color-gray-400: #9ca3af;
+$color-gray-500: #6b7280;
+$color-gray-600: #4b5563;
+$color-gray-700: #374151;
+$color-gray-800: #1f2937;
+$color-gray-900: #111827;
+
+// Surfaces / text / borders
+$bg-page: #f6f8fb;
+$bg-surface: $color-white;
+$bg-subtle: $color-gray-50;
+$bg-muted: $color-gray-100;
+$surface-primary-soft: #eff6ff;
+$surface-success-soft: #ecfdf5;
+$surface-warning-soft: #fffbeb;
+$surface-warning-subtle: #fff7ed;
+$surface-danger-soft: #fef2f2;
+$surface-danger-subtle: #fff0f0;
+$bg-dark: $color-gray-800;
+$bg-darker: $color-gray-900;
+$text-primary: $color-gray-800;
+$text-secondary: $color-gray-600;
+$text-tertiary: $color-gray-500;
+$text-muted: $color-gray-500;
+$text-disabled: $color-gray-400;
+$text-inverse: $color-white;
+$border-color: $color-gray-200;
+$border-light: $color-gray-200;
+$border-medium: $color-gray-300;
+$border-dark: $color-gray-400;
+
+// Spacing / sizing
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-8: 32px;
+$space-10: 40px;
+$space-12: 48px;
+$space-16: 64px;
+$spacing-xs: $space-1;
+$spacing-sm: $space-2;
+$spacing-md: $space-4;
+$spacing-lg: $space-6;
+$spacing-xl: $space-8;
+$spacing-2xl: $space-12;
+$spacing-3xl: $space-16;
+
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-2xl: 20px;
+$radius-full: 9999px;
+$border-radius-sm: $radius-sm;
+$border-radius-md: $radius-md;
+$border-radius-lg: $radius-lg;
+$border-radius-xl: $radius-xl;
+$border-radius-2xl: $radius-2xl;
+$border-radius-full: $radius-full;
+
+// Typography
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Shadows / motion
+$shadow-color-light: rgba(0, 0, 0, 0.05);
+$shadow-color: rgba(0, 0, 0, 0.1);
+$shadow-color-dark: rgba(0, 0, 0, 0.2);
+$shadow-sm: 0 1px 2px $shadow-color-light;
+$shadow-md: 0 8px 24px rgba(15, 23, 42, 0.1);
+$shadow-lg: 0 18px 45px rgba(15, 23, 42, 0.14);
+$shadow: $shadow-sm;
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.14);
+$shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+$transition-fast: 160ms ease;
+$transition-base: 220ms ease;
+$transition-slow: 300ms ease;
+$transition-slower: 500ms ease;
+
+// Layout
+$sidebar-width: 280px;
+$sidebar-collapsed-width: 80px;
+$sidebar-bg: $bg-surface;
+$header-height: 68px;
+$header-bg: $bg-surface;
+$card-bg: $bg-surface;
+$card-border-radius: $radius-lg;
+$card-shadow: $shadow-sm;
+$card-shadow-hover: $shadow-md;
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1rem;
+$btn-border-radius: $radius-md;
+$input-height: 2.5rem;
+$input-padding-y: 0.5rem;
+$input-padding-x: 0.75rem;
+$input-border-radius: $radius-md;
+$table-header-bg: $color-gray-50;
+$table-row-hover-bg: $color-gray-50;
+$table-border-color: $border-light;
+$modal-max-width: 680px;
+$modal-max-width-lg: 920px;
+$modal-max-width-xl: 1140px;
+
+// Breakpoints / z-index
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+$container-max-width: 1280px;
+$container-padding: 1rem;
+$grid-gap: 1.5rem;
+$grid-columns: 12;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-fixed: 1000;
+$z-modal-backdrop: 2000;
+$z-modal: 2100;
+$z-popover: 2200;
+$z-tooltip: 2300;
+$z-toast: 2400;
+
+$animation-duration-fast: 150ms;
+$animation-duration-base: 300ms;
+$animation-duration-slow: 500ms;
+$animation-timing-ease: cubic-bezier(0.4, 0, 0.2, 1);
+$animation-timing-linear: linear;
+
+$gradient-primary: linear-gradient(
+  135deg,
+  $color-primary 0%,
+  $color-primary-dark 100%
+);
+$gradient-primary-dark: linear-gradient(
+  135deg,
+  $color-primary-dark 0%,
+  $color-gray-900 100%
+);
+$gradient-success: linear-gradient(
+  135deg,
+  $color-success 0%,
+  $color-success-dark 100%
+);
+$gradient-warning: linear-gradient(
+  135deg,
+  $color-warning 0%,
+  $color-warning-dark 100%
+);
+$gradient-danger: linear-gradient(
+  135deg,
+  $color-danger 0%,
+  $color-danger-dark 100%
+);
+$gradient-info: linear-gradient(135deg, $color-info 0%, $color-info-dark 100%);
+$gradient-bg-light: linear-gradient(
+  135deg,
+  $color-gray-50 0%,
+  $color-white 100%
+);
+$gradient-bg-dark: linear-gradient(
+  135deg,
+  $color-gray-800 0%,
+  $color-gray-900 100%
+);
+
+// Business semantics: aliases, never new colors.
+$sale-primary: $color-primary;
+$sale-primary-dark: $color-primary-dark;
+$sale-success: $color-success;
+$sale-success-dark: $color-success-dark;
+$sale-warning: $color-warning;
+$sale-warning-dark: $color-warning-dark;
+$sale-danger: $color-danger;
+$sale-danger-dark: $color-danger-dark;
+$sale-info: $color-secondary;
+$sale-info-dark: $color-secondary-dark;
+$sale-gray-50: $color-gray-50;
+$sale-gray-100: $color-gray-100;
+$sale-gray-200: $color-gray-200;
+$sale-gray-300: $color-gray-300;
+$sale-gray-400: $color-gray-400;
+$sale-gray-500: $color-gray-500;
+$sale-gray-600: $color-gray-600;
+$sale-gray-700: $color-gray-700;
+$sale-gray-800: $color-gray-800;
+$sale-gray-900: $color-gray-900;
+$sale-pending: $color-warning;
+$sale-completed: $color-success;
+$sale-cancelled: $color-danger;
+$cash-primary: $color-primary;
+$cash-success: $color-success;
+$cash-warning: $color-warning;
+$cash-danger: $color-danger;
+$cash-info: $color-secondary;
+$cash-open: $color-success;
+$cash-closed: $color-danger;
+$inventory-primary: $color-primary;
+$inventory-success: $color-success;
+$inventory-warning: $color-warning;
+$inventory-danger: $color-danger;
+$inventory-low-stock: $color-warning;
+$inventory-out-stock: $color-danger;
+$inventory-in-stock: $color-success;
+$patient-active: $color-success;
+$patient-inactive: $color-danger;
+$patient-premium: $color-warning;
+
+// Legacy naming compatibility. All point to canonical tokens.
+$primary: $color-primary;
+$primary-color: $color-primary;
+$primary-dark: $color-primary-dark;
+$primary-darker: $color-primary-darker;
+$primary-light: $color-primary-light;
+$primary-lighter: $color-primary-lighter;
+$secondary: $color-success;
+$secondary-color: $color-secondary;
+$secondary-dark: $color-secondary-dark;
+$secondary-light: $color-secondary-light;
+$secondary-darker: $color-secondary-darker;
+$secondary-lighter: $color-secondary-lighter;
+$accent: $color-warning;
+$warning: $color-warning;
+$warning-color: $color-warning;
+$warning-dark: $color-warning-dark;
+$warning-light: $color-warning-light;
+$warning-darker: $color-warning-darker;
+$warning-lighter: $color-warning-lighter;
+$error: $color-danger;
+$danger-color: $color-danger;
+$danger-dark: $color-danger-dark;
+$danger-light: $color-danger-light;
+$danger-darker: $color-danger-darker;
+$danger-lighter: $color-danger-lighter;
+$info: $color-secondary;
+$info-color: $color-info;
+$info-dark: $color-info-dark;
+$info-light: $color-info-light;
+$info-darker: $color-info-darker;
+$info-lighter: $color-info-lighter;
+$white: $color-white;
+$black: $color-black;
+$gray-50: $color-gray-50;
+$gray-100: $color-gray-100;
+$gray-200: $color-gray-200;
+$gray-300: $color-gray-300;
+$gray-400: $color-gray-400;
+$gray-500: $color-gray-500;
+$gray-600: $color-gray-600;
+$gray-700: $color-gray-700;
+$gray-800: $color-gray-800;
+$gray-900: $color-gray-900;
+$gray-dark: $color-gray-800;
+$gray: $color-gray-500;
+$gray-medium: $color-gray-400;
+$gray-light: $color-gray-100;
+$bg-primary: $bg-page;
+$bg-secondary: $bg-surface;
+$bg-tertiary: $bg-muted;
+$shadow-primary: 0 4px 6px rgba(37, 99, 235, 0.2);
+$shadow-success: 0 4px 6px rgba(16, 185, 129, 0.2);
+$shadow-warning: 0 4px 6px rgba(245, 158, 11, 0.2);
+$shadow-danger: 0 4px 6px rgba(239, 68, 68, 0.2);
+$shadow-info: 0 4px 6px rgba(6, 182, 212, 0.2);
+$dark-bg-primary: $color-gray-900;
+$dark-bg-secondary: $color-gray-800;
+$dark-bg-tertiary: $color-gray-700;
+$dark-text-primary: $color-gray-50;
+$dark-text-secondary: $color-gray-200;
+$dark-text-tertiary: $color-gray-300;
+$dark-border: $color-gray-700;
+$sidebar-bg-dark: $color-gray-900;
+$header-bg-dark: $color-gray-800;
+$card-bg-dark: $color-gray-800;
+$spacing-2xl: $space-12;
+$spacing-3xl: $space-16;
+$modal-max-width-xl: 1140px;
+$container-padding: 1rem;
+$grid-gap: 1.5rem;
+$grid-columns: 12;
+
+// Common compatibility values used by older module styles.
+$bg-color: $bg-page;
+$success-color: $color-success;
+$breakpoint: $breakpoint-md;
+
+// Utility mixins retained as reusable primitives.
+@function rem($px) {
+  @return calc(#{$px} / 16px * 1rem);
+}
+@mixin responsive($name) {
+  @if $name == xs {
+    @media (max-width: $breakpoint-xs) {
+      @content;
+    }
+  } @else if $name == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $name == md {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $name == lg {
+    @media (max-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $name == xl {
+    @media (max-width: $breakpoint-xl) {
+      @content;
+    }
+  } @else if $name == 2xl {
+    @media (max-width: $breakpoint-2xl) {
+      @content;
+    }
+  }
+}
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+@mixin focus {
+  &:focus {
+    outline: none;
+    @content;
+  }
+}
+@mixin placeholder {
+  &::placeholder {
+    @content;
+  }
+}
+@mixin custom-scrollbar(
+  $width: 8px,
+  $track-color: $gray-100,
+  $thumb-color: $gray-300
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+    border-radius: $radius-full;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: $radius-full;
+  }
+}
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin card-shadow {
+  background: $card-bg;
+  border-radius: $card-border-radius;
+  box-shadow: $card-shadow;
+  transition: $transition-base;
+  @include hover {
+    box-shadow: $card-shadow-hover;
+  }
+}
+@mixin btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  min-height: 38px;
+  padding: $btn-padding-y $btn-padding-x;
+  background: $color-primary;
+  color: $white;
+  border: 0;
+  border-radius: $btn-border-radius;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: $transition-base;
+  &:hover:not(:disabled) {
+    background: $color-primary-dark;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+@mixin badge($bg-color, $text-color: $white) {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: $bg-color;
+  color: $text-color;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    $gray-200 25%,
+    $gray-100 50%,
+    $gray-200 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: $radius-md;
+}
+@mixin fade-in($duration: $animation-duration-base) {
+  animation: fade-in $duration $animation-timing-ease;
+}
+@mixin slide-in($direction: right, $duration: $animation-duration-base) {
+  animation: slide-in-#{$direction} $duration $animation-timing-ease;
+}
+@mixin pulse {
+  animation: pulse 2s $animation-timing-ease infinite;
+}
+@mixin spin($duration: $animation-duration-slow) {
+  animation: spin $duration $animation-timing-linear infinite;
+}

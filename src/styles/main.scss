@@ -1,0 +1,14 @@
+@use './abstracts/tokens' as *;
+@use './components/buttons';
+@use './components/forms';
+@use './components/modal';
+@use './components/page';
+@use './components/table';
+@use './components/states';
+@use './components/add-button';
+@use './base/responsive';
+@use './components/module-refresh';
+
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;

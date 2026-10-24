@@ -1,0 +1,72 @@
+export let mockPatients = [
+  {
+    id: 1,
+    dni: "12345678",
+    name: "Juan Pérez",
+    phone: "999888777",
+    email: "juan@test.com",
+  },
+  {
+    id: 2,
+    dni: "87654321",
+    name: "María García",
+    phone: "999888776",
+    email: "maria@test.com",
+  },
+  {
+    id: 3,
+    dni: "45678912",
+    name: "Carlos Rodríguez",
+    phone: "999888775",
+    email: "carlos@test.com",
+  },
+  {
+    id: 4,
+    dni: "78912345",
+    name: "Ana Martínez",
+    phone: "999888774",
+    email: "ana@test.com",
+  },
+  {
+    id: 5,
+    dni: "32165498",
+    name: "Luis Sánchez",
+    phone: "999888773",
+    email: "luis@test.com",
+  },
+  {
+    id: 6,
+    dni: "65498732",
+    name: "Laura López",
+    phone: "999888772",
+    email: "laura@test.com",
+  },
+  {
+    id: 7,
+    dni: "15975346",
+    name: "Diego Fernández",
+    phone: "999888771",
+    email: "diego@test.com",
+  },
+  {
+    id: 8,
+    dni: "35795182",
+    name: "Sofia Torres",
+    phone: "999888770",
+    email: "sofia@test.com",
+  },
+  {
+    id: 9,
+    dni: "75315964",
+    name: "Pablo Gómez",
+    phone: "999888769",
+    email: "pablo@test.com",
+  },
+  {
+    id: 10,
+    dni: "24681357",
+    name: "Carmen Ruiz",
+    phone: "999888768",
+    email: "carmen@test.com",
+  }
+]

@@ -1,0 +1,112 @@
+/* Responsive foundation shared by every ERP module. */
+html {
+  overflow-x: hidden;
+}
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+.main-layout__main {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.main-layout__main > * {
+  min-width: 0;
+}
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+@media (max-width: 1024px) {
+  .main-layout__main {
+    padding: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .main-layout__main {
+    padding: 14px;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom));
+  }
+  :where(
+    .table-wrapper,
+    .table-container,
+    [class$="-table-container"],
+    .data-table,
+    .lab-table,
+    .patients-table,
+    .sales-table,
+    .products-table,
+    .appointments-table
+  ) {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  :where(
+      .table-wrapper,
+      .table-container,
+      [class$="-table-container"],
+      .data-table,
+      .lab-table,
+      .patients-table,
+      .sales-table,
+      .products-table,
+      .appointments-table
+    )
+    table {
+    min-width: 680px;
+  }
+  :where(input, select, textarea) {
+    max-width: 100%;
+  }
+  :where(
+    .modal,
+    .dialog,
+    [class*="modal__content"],
+    [class*="dialog__content"]
+  ) {
+    max-width: calc(100vw - 24px) !important;
+  }
+}
+@media (max-width: 560px) {
+  .main-layout__main {
+    padding: 10px;
+  }
+  :where(h1, .page-title, [class*="__title"]) {
+    overflow-wrap: anywhere;
+  }
+  :where(.form-row, .form-grid, .filters-grid, .stats-grid) {
+    grid-template-columns: 1fr !important;
+  }
+  :where(.actions, .toolbar, [class*="__actions"], [class*="__toolbar"]) {
+    flex-wrap: wrap;
+  }
+  :where(.actions > button, .toolbar > button, [class*="__actions"] > button) {
+    min-height: 42px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

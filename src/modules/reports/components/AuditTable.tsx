@@ -1,0 +1,2 @@
+import type {AuditEntry} from '../types/reports.types'
+export const AuditTable=({items}:{items:AuditEntry[]})=><div className="operational-table-wrap"><table className="operational-table"><thead><tr><th>Código</th><th>Entidad</th><th>Acción</th><th>Usuario</th><th>Detalle</th><th>Fecha</th></tr></thead><tbody>{items.map(item=><tr key={item.id}><td>{item.code}</td><td>{item.entity}</td><td>{item.action}</td><td>{item.user_name}</td><td>{item.detail??'—'}</td><td>{item.created_at}</td></tr>)}</tbody></table></div>

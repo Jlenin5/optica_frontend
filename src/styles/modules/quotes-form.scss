@@ -1,0 +1,1331 @@
+@use '../abstracts/tokens' as *;
+
+.sale-form-page {
+  min-height: 100%;
+  padding: $space-8;
+  background: $bg-page;
+  animation: sale-page-enter $transition-base;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    max-width: 1400px;
+    margin: 0 auto $space-6;
+  }
+
+  &__back-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-secondary;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+      background: $bg-subtle;
+      color: $text-primary;
+      border-color: $border-medium;
+      transform: translateX(-2px);
+    }
+  }
+
+  &__title {
+    margin: 0;
+    color: $text-primary;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-4;
+
+    &__header {
+      margin-bottom: $space-4;
+    }
+    &__title {
+      font-size: $font-size-xl;
+    }
+  }
+}
+
+.sale-form {
+  width: min(1400px, 100%);
+  margin: 0 auto;
+
+  &__container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(300px, 0.8fr);
+    gap: $space-6;
+    align-items: start;
+
+    @media (max-width: $breakpoint-xl) {
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    }
+
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__main,
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+    min-width: 0;
+  }
+
+  &__sidebar {
+    position: sticky;
+    top: $space-4;
+
+    @media (max-width: $breakpoint-lg) {
+      position: static;
+    }
+  }
+
+  &__section,
+  &__notes-card {
+    background: $bg-surface;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+  }
+
+  &__section {
+    padding: $space-5;
+    transition: box-shadow $transition-base, border-color $transition-base;
+
+    &:focus-within {
+      border-color: rgba($color-primary, 0.35);
+      box-shadow: $shadow-md;
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      margin: 0 0 $space-4;
+      padding-bottom: $space-3;
+      border-bottom: 1px solid $border-color;
+      color: $text-primary;
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+
+      svg {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-4;
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__field {
+    display: grid;
+    gap: $space-2;
+    min-width: 0;
+
+    label {
+      color: $text-secondary;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      line-height: 1.3;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+    }
+  }
+
+  &__required {
+    color: $color-danger;
+  }
+
+  &__error {
+    color: $color-danger;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+  }
+
+  &__error-message {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    margin-top: $space-2;
+    padding: $space-3;
+    border: 1px solid rgba($color-danger, 0.18);
+    border-radius: $radius-md;
+    background: $surface-danger-soft;
+    color: $color-danger-dark;
+    font-size: $font-size-xs;
+  }
+
+  /* Product area */
+  &__section--products {
+    padding-bottom: $space-3;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $space-4;
+    margin-bottom: $space-4;
+    padding-bottom: $space-3;
+    border-bottom: 1px solid $border-color;
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      margin: 0;
+      color: $text-primary;
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      white-space: nowrap;
+
+      svg {
+        color: $color-primary;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: $space-2;
+
+      @media (max-width: $breakpoint-md) {
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      &__add-product-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: $space-2;
+        min-height: 36px;
+        padding: 7px 11px;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        background: $bg-surface;
+        color: $text-secondary;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        cursor: pointer;
+        transition: $transition-fast;
+
+        &:hover {
+          background: $surface-primary-soft;
+          border-color: rgba($color-primary, 0.35);
+          color: $color-primary;
+          transform: translateY(-1px);
+        }
+
+        &:focus-visible {
+          outline: 3px solid rgba($color-primary, 0.14);
+          outline-offset: 1px;
+        }
+
+        &--custom {
+          color: $color-secondary-dark;
+          border-color: rgba($color-secondary, 0.25);
+
+          &:hover {
+            background: rgba($color-secondary, 0.07);
+            border-color: rgba($color-secondary, 0.4);
+            color: $color-secondary-dark;
+          }
+        }
+
+        @media (max-width: $breakpoint-md) {
+          flex: 1 1 calc(50% - $space-2);
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+    }
+  }
+
+  &__products-scroll {
+    max-height: 460px;
+    overflow: auto;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    &::-webkit-scrollbar-track {
+      background: $bg-muted;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $border-medium;
+      border-radius: $radius-full;
+    }
+  }
+
+  &__products-table {
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+
+      thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background: $table-header-bg;
+        box-shadow: 0 1px 0 $border-color;
+
+        th {
+          padding: $space-3;
+          text-align: left;
+          color: $text-tertiary;
+          font-size: 11px;
+          font-weight: $font-weight-bold;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid $border-light;
+          transition: background $transition-fast;
+
+          &:hover {
+            background: $bg-subtle;
+          }
+
+          &:last-child {
+            border-bottom: 0;
+          }
+        }
+
+        td {
+          padding: $space-3;
+          color: $text-secondary;
+          font-size: $font-size-xs;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  &__product-name {
+    min-width: 140px;
+    border: 0;
+    background: transparent;
+  }
+
+  &__product-quantity,
+  &__product-price {
+    width: 80px;
+    padding: 7px;
+    text-align: center;
+  }
+
+  &__product-discount {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+
+    &-input {
+      width: 70px;
+      text-align: center;
+    }
+
+    &-type {
+      width: 52px;
+    }
+  }
+
+  &__product-total {
+    color: $color-success-dark;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+  }
+
+  &__remove-product {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-md;
+    background: transparent;
+    color: $color-danger;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+      background: $surface-danger-soft;
+      transform: scale(1.04);
+    }
+  }
+
+  &__empty-products {
+    display: grid;
+    justify-items: center;
+    gap: $space-2;
+    padding: $space-10 $space-5;
+    color: $text-muted;
+    text-align: center;
+    background: $bg-subtle;
+
+    svg {
+      color: $border-medium;
+    }
+
+    p {
+      margin: 0 0 $space-2;
+      font-size: $font-size-sm;
+    }
+
+    button {
+      min-height: 36px;
+      padding: 7px 12px;
+      border: 0;
+      border-radius: $radius-md;
+      background: $color-primary;
+      color: $white;
+      font-weight: $font-weight-semibold;
+      cursor: pointer;
+      transition: $transition-fast;
+
+      &:hover {
+        background: $color-primary-dark;
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  /* Totals */
+  &__totals-card {
+    overflow: hidden;
+    border: 1px solid rgba($color-primary, 0.18);
+    border-radius: $radius-lg;
+    background: $gradient-primary;
+    color: $white;
+    box-shadow: $shadow-md;
+
+    .sale-form__section--totals {
+      padding: $space-5;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+
+  &__total-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+    padding: $space-2 0;
+    font-size: $font-size-sm;
+
+    &--discount {
+      color: $color-warning-lighter;
+    }
+
+    &--grand {
+      margin-top: $space-2;
+      padding-top: $space-4;
+      border-top: 1px solid rgba($white, 0.22);
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+    }
+
+    input {
+      width: 110px;
+      min-height: 36px;
+      border-color: rgba($white, 0.28);
+      background: rgba($white, 0.12);
+      color: $white;
+      text-align: right;
+
+      &:focus {
+        border-color: rgba($white, 0.7);
+        box-shadow: 0 0 0 3px rgba($white, 0.12);
+      }
+    }
+  }
+
+  &__totals {
+    width: 100%;
+  }
+
+  &__discount-controls,
+  &__discount-inputs {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  &__discount-inputs {
+    input {
+      width: 72px;
+      min-height: 34px;
+    }
+    select {
+      width: 54px;
+      min-height: 34px;
+    }
+  }
+
+  &__change-amount {
+    color: $color-warning-lighter;
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+  }
+
+  /* Notes */
+  &__notes-card {
+    padding: $space-5;
+
+    textarea {
+      width: 100%;
+      min-height: 96px;
+    }
+  }
+
+  /* Page actions */
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $space-3;
+    padding-top: $space-1;
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: $space-2;
+      min-width: 120px;
+      min-height: 40px;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      border-radius: $radius-md;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      cursor: pointer;
+      transition: $transition-fast;
+
+      &:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    .sale-form__btn--secondary {
+      background: $bg-surface;
+      border-color: $border-color;
+      color: $text-secondary;
+
+      &:hover:not(:disabled) {
+        background: $bg-subtle;
+        border-color: $border-medium;
+        color: $text-primary;
+      }
+    }
+
+    .sale-form__btn--primary {
+      background: $color-primary;
+      border-color: $color-primary;
+      color: $white;
+      box-shadow: 0 3px 8px rgba($color-primary, 0.2);
+
+      &:hover:not(:disabled) {
+        background: $color-primary-dark;
+        border-color: $color-primary-dark;
+        transform: translateY(-1px);
+      }
+    }
+
+    @media (max-width: $breakpoint-md) {
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      margin-inline: -$space-4;
+      padding: $space-3 $space-4;
+      background: rgba($bg-page, 0.94);
+      border-top: 1px solid $border-color;
+      backdrop-filter: blur(10px);
+
+      button {
+        flex: 1;
+      }
+    }
+  }
+
+  &__spinner,
+  .sale-form-modal__spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: $radius-full;
+    animation: sale-spin 700ms linear infinite;
+  }
+
+  /* Item metadata */
+  &__item-name-cell {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: $space-2;
+    }
+  }
+
+  &__item-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 3px 7px;
+    border-radius: $radius-full;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+
+    &--product {
+      background: $surface-primary-soft;
+      color: $color-primary-dark;
+    }
+
+    &--lens {
+      background: rgba($color-secondary, 0.1);
+      color: $color-secondary-dark;
+    }
+
+    &--service {
+      background: $surface-success-soft;
+      color: $color-success-dark;
+    }
+
+    &--custom {
+      background: $surface-warning-soft;
+      color: $color-warning-dark;
+    }
+  }
+
+  &__item-expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    width: fit-content;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: $text-muted;
+    font-size: 11px;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__item-specs-row {
+    background: $bg-subtle;
+
+    td {
+      padding: $space-2 $space-3 $space-3 !important;
+    }
+
+    textarea {
+      min-height: 52px;
+      font-size: $font-size-xs;
+    }
+  }
+}
+
+.sale-form__patient-selector {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  input {
+    flex: 1;
+    cursor: pointer;
+    background-color: $color-white;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: $color-gray-300;
+    }
+
+    &.error {
+      border-color: $color-danger;
+      box-shadow: 0 0 0 3px rgba($color-danger, 0.1);
+    }
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: $color-gray-100;
+    border: 1px solid $color-gray-200;
+    border-radius: $radius-md;
+    color: $color-gray-600;
+    cursor: pointer;
+    transition: $transition-base;
+
+    &:hover {
+      background: $color-gray-200;
+      border-color: $color-gray-300;
+      color: $color-gray-800;
+    }
+  }
+}
+
+
+.search-bar {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+
+  input {
+    flex: 1;
+    padding: 0.625rem 1rem;
+    border: 1px solid $color-gray-200;
+    border-radius: $radius-md;
+    font-size: 0.875rem;
+    transition: $transition-base;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    }
+
+    &::placeholder {
+      color: $color-gray-400;
+    }
+  }
+
+  .btn-new-patient {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+    color: white;
+    border: none;
+    border-radius: $radius-md;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: $transition-base;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+.patient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color-gray-100;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-gray-300;
+    border-radius: 3px;
+  }
+}
+
+.patient-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: $color-gray-50;
+  border-radius: $radius-md;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover {
+    background: white;
+    border-color: $color-primary;
+    box-shadow: $shadow-sm;
+  }
+
+  .patient-name {
+    font-weight: 500;
+    color: $color-gray-800;
+  }
+
+  .patient-doc {
+    font-size: 0.813rem;
+    color: $color-gray-500;
+    background: $color-gray-200;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+  }
+}
+
+.sale-form-modal {
+  // display: grid;
+  // gap: $space-4;
+  // min-width: 0;
+
+  &__hint,
+  &__error,
+  &__selected-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    padding: $space-3;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+  }
+
+  &__hint {
+    border: 1px solid rgba($color-primary, 0.14);
+    background: $surface-primary-soft;
+    color: $color-primary-dark;
+  }
+
+  &__error {
+    border: 1px solid rgba($color-danger, 0.18);
+    background: $surface-danger-soft;
+    color: $color-danger-dark;
+  }
+
+  &__selected-banner {
+    align-items: center;
+    border: 1px solid rgba($color-success, 0.18);
+    background: $surface-success-soft;
+    color: $color-success-dark;
+  }
+
+  &__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      min-height: 42px;
+      padding-left: 40px;
+      padding-right: 38px;
+    }
+
+    &-icon {
+      position: absolute;
+      left: 13px;
+      z-index: 1;
+      color: $text-muted;
+      pointer-events: none;
+    }
+
+    &-clear {
+      position: absolute;
+      right: 6px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border: 0;
+      border-radius: $radius-md;
+      background: transparent;
+      color: $text-muted;
+      cursor: pointer;
+
+      &:hover {
+        background: $bg-muted;
+        color: $text-primary;
+      }
+    }
+
+    &--compact input {
+      min-height: 38px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: $space-2;
+    max-height: 340px;
+    overflow-y: auto;
+    padding: 2px;
+
+    &--compact {
+      max-height: 280px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $border-medium;
+      border-radius: $radius-full;
+    }
+  }
+
+  &__card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: $space-3;
+    width: 100%;
+    min-height: 68px;
+    padding: $space-3;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+      border-color: rgba($color-primary, 0.3);
+      background: $bg-subtle;
+      transform: translateY(-1px);
+      box-shadow: $shadow-sm;
+    }
+
+    &.is-selected {
+      border-color: rgba($color-primary, 0.55);
+      background: $surface-primary-soft;
+      box-shadow: 0 0 0 2px rgba($color-primary, 0.08);
+    }
+  }
+
+  &__card-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-md;
+    background: $bg-muted;
+    color: $text-secondary;
+
+    &--product {
+      background: $surface-primary-soft;
+      color: $color-primary;
+    }
+    &--lens {
+      background: rgba($color-secondary, 0.1);
+      color: $color-secondary-dark;
+    }
+    &--service {
+      background: $surface-success-soft;
+      color: $color-success-dark;
+    }
+  }
+
+  &__card-body {
+    min-width: 0;
+  }
+
+  &__card-title {
+    overflow: hidden;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-top: 3px;
+    color: $text-muted;
+    font-size: 11px;
+  }
+
+  &__card-desc {
+    overflow: hidden;
+    max-width: 360px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__card-price {
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+  }
+
+  &__card-check {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: $radius-full;
+    background: $color-primary;
+    color: $white;
+  }
+
+  &__state {
+    display: grid;
+    justify-items: center;
+    gap: $space-2;
+    padding: $space-10 $space-4;
+    color: $text-muted;
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+
+    &--empty svg {
+      color: $border-medium;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-3;
+
+    &--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+
+      &--2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &__input-prefix {
+    position: relative;
+
+    > span {
+      position: absolute;
+      top: 50%;
+      left: 11px;
+      z-index: 1;
+      color: $text-muted;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: 34px;
+    }
+  }
+
+  &__discount {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px;
+    gap: $space-2;
+  }
+
+  &__section-title {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding-bottom: $space-2;
+    border-bottom: 1px solid $border-color;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+
+  &__features {
+    display: grid;
+    gap: $space-3;
+    padding: $space-3;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-subtle;
+  }
+
+  &__feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-2;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__feature-group {
+    display: grid;
+    gap: 3px;
+    padding: $space-2;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+  }
+
+  &__feature-type {
+    color: $text-muted;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  &__feature-names {
+    color: $text-secondary;
+    font-size: $font-size-xs;
+    line-height: 1.4;
+  }
+
+  &__eye-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-2;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__eye-chip {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    min-height: 42px;
+    padding: 8px 10px;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-secondary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-align: left;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+      border-color: rgba($color-primary, 0.3);
+      background: $bg-subtle;
+    }
+
+    &.is-active {
+      border-color: rgba($color-primary, 0.45);
+      background: $surface-primary-soft;
+      color: $color-primary-dark;
+    }
+  }
+
+  &__link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    width: fit-content;
+    margin-top: $space-1;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: $color-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-primary-dark;
+      text-decoration: underline;
+    }
+  }
+
+  &__foot-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: $space-4;
+
+    @media (max-width: $breakpoint-sm) {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+  &__total-chip {
+    display: flex;
+    align-items: baseline;
+    gap: $space-3;
+    padding: 8px 12px;
+    border: 1px solid rgba($color-primary, 0.16);
+    border-radius: $radius-md;
+    background: $surface-primary-soft;
+    color: $text-secondary;
+    font-size: $font-size-xs;
+
+    strong {
+      color: $color-primary-dark;
+      font-size: $font-size-md;
+    }
+
+    &--lens {
+      background: rgba($color-secondary, 0.07);
+      border-color: rgba($color-secondary, 0.16);
+
+      strong {
+        color: $color-secondary-dark;
+      }
+    }
+  }
+
+  &__acts {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $space-2;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 100%;
+
+      button {
+        flex: 1;
+      }
+    }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &--ghost {
+      background: $bg-surface;
+      border-color: $border-color;
+      color: $text-secondary;
+
+      &:hover:not(:disabled) {
+        background: $bg-subtle;
+        border-color: $border-medium;
+        color: $text-primary;
+      }
+    }
+
+    &--primary {
+      background: $color-primary;
+      border-color: $color-primary;
+      color: $white;
+      box-shadow: 0 2px 7px rgba($color-primary, 0.18);
+
+      &:hover:not(:disabled) {
+        background: $color-primary-dark;
+        border-color: $color-primary-dark;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+@keyframes sale-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sale-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sale-form-page,
+  .sale-form-modal__card,
+  .sale-form__actions button,
+  .sale-form__remove-product {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.sale-form__origin-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted-color, #64748b);
+}

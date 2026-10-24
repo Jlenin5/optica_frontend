@@ -1,0 +1,616 @@
+// styles/limits.scss
+@use '../abstracts/tokens' as *;
+
+.limits-page {
+  padding: 24px;
+  background: $bg-page;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__header-left {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: $color-gray-500;
+    margin: 0;
+  }
+
+  &__add-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba($primary, 0.2);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba($primary, 0.3);
+    }
+  }
+
+  &__add-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__content {
+    margin-top: 24px;
+  }
+
+  &__load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  &__load-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: white;
+    border: 1px solid $color-gray-200;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: $primary;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba($primary, 0.05);
+      border-color: $primary;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba($primary, 0.3);
+    border-top-color: $primary;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+  }
+}
+
+// Limit Filters
+.limit-filters {
+  margin-bottom: 24px;
+
+  &__search {
+    max-width: 400px;
+    position: relative;
+
+    svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $color-gray-400;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px 10px 40px;
+      border: 1px solid $color-gray-200;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+      }
+    }
+  }
+}
+
+// Limit Table
+.limit-table-container {
+  background: white;
+  border-radius: 16px;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.limit-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: $color-gray-50;
+    border-bottom: 1px solid $color-gray-200;
+
+    th {
+      padding: 16px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: $color-gray-500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $color-gray-100;
+      transition: background 0.2s;
+
+      &:hover {
+        background: $color-gray-50;
+      }
+    }
+
+    td {
+      padding: 16px;
+      font-size: 14px;
+      color: $color-gray-700;
+    }
+  }
+
+  &__id {
+    font-weight: 500;
+    color: $color-gray-500;
+    width: 80px;
+  }
+
+  &__code {
+    code {
+      background: $color-gray-100;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: monospace;
+      color: $primary;
+    }
+  }
+
+  &__name-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__name-text {
+    font-weight: 500;
+    color: $color-gray-900;
+  }
+
+  &__name-hint {
+    font-size: 11px;
+    color: $color-gray-400;
+    text-transform: capitalize;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  &__action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &--edit {
+      background: rgba($primary, 0.1);
+      color: $primary;
+
+      &:hover {
+        background: rgba($primary, 0.2);
+        transform: scale(1.05);
+      }
+    }
+
+    &--delete {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+
+      &:hover {
+        background: rgba($color-danger, 0.2);
+        transform: scale(1.05);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+
+  &__spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba($color-danger, 0.3);
+    border-top-color: $color-danger;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+// Limit Form
+.limit-form {
+  &__field {
+    margin-bottom: 24px;
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: $color-gray-700;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid $color-gray-200;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+      }
+
+      &.error {
+        border-color: $color-danger;
+        
+        &:focus {
+          box-shadow: 0 0 0 3px rgba($color-danger, 0.1);
+        }
+      }
+    }
+  }
+
+  &__helper {
+    font-size: 12px;
+    color: $color-gray-500;
+    margin: 4px 0 0 0;
+  }
+
+  &__error {
+    font-size: 12px;
+    color: $color-danger;
+    margin-top: 4px;
+    display: block;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid $color-gray-200;
+  }
+
+  &__cancel {
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid $color-gray-200;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-gray-500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $color-gray-50;
+      border-color: $color-gray-300;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba($primary, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+// Limit Skeleton
+.limit-skeleton {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid $color-gray-200;
+  animation: pulse 1.5s ease-in-out infinite;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $color-gray-200;
+  }
+
+  &__line {
+    height: 20px;
+    background: $color-gray-200;
+    border-radius: 4px;
+
+    &--title {
+      width: 200px;
+    }
+
+    &--subtitle {
+      width: 150px;
+    }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid $color-gray-100;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__cell {
+    height: 24px;
+    background: $color-gray-200;
+    border-radius: 4px;
+
+    &--code {
+      width: 120px;
+    }
+
+    &--name {
+      width: 200px;
+    }
+
+    &--actions {
+      width: 80px;
+    }
+  }
+}
+
+// Empty State
+.limits-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  padding: 48px;
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    color: $color-gray-300;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $color-gray-500;
+    margin: 0 0 24px 0;
+  }
+
+  &__button {
+    padding: 10px 24px;
+    background: $primary;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $primary-dark;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Modal
+/* Modal shell centralizado en components/_modal.scss */
+
+/* Modal shell centralizado en components/_modal.scss */
+
+// Animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .limits-page {
+    padding: 16px;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__add-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .limit-table {
+    font-size: 13px;
+
+    th, td {
+      padding: 12px;
+    }
+  }
+
+  .limits-modal {
+    width: 95%;
+    margin: 16px;
+  }
+}
+
+
+
+
+
+
+
+// Limit Usage Modal
+
+
+
+
+// Estilo para el botón de uso en la tabla de límites
+.limit-table {
+  &__usage {
+    .limit-table__usage-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba($primary, 0.1);
+      border: none;
+      border-radius: 8px;
+      color: $primary;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: rgba($primary, 0.2);
+        transform: translateX(2px);
+      }
+    }
+  }
+}
+
+// Estilo para el botón de ver en PlanLimitsTable
+.plan-limits-table {
+  &__action-btn--view {
+    background: rgba($primary, 0.1);
+    color: $primary;
+
+    &:hover {
+      background: rgba($primary, 0.2);
+      transform: scale(1.05);
+    }
+  }
+}

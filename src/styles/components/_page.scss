@@ -1,0 +1,44 @@
+@use "../abstracts/tokens" as *;
+
+.module-page {
+  display: grid;
+  gap: $space-5;
+}
+.module-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+.module-page__heading {
+  min-width: 0;
+}
+.module-page__title {
+  margin: 0;
+  color: $text-primary;
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 750;
+}
+.module-page__description {
+  margin: 5px 0 0;
+  color: $text-muted;
+  font-size: 12px;
+}
+.module-page__actions {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+.module-page__content {
+  min-width: 0;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+}
+.module-page__filters {
+  min-width: 0;
+}

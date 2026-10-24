@@ -1,0 +1,50 @@
+@use "../abstracts/tokens" as *;
+
+.main-layout {
+  display: flex;
+  min-height: 100dvh;
+  background: $bg-page;
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+    min-height: 100dvh;
+    margin-left: $sidebar-width;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left $transition-base;
+  }
+
+  &__main {
+    flex: 1;
+    min-width: 0;
+    padding: $space-6;
+    overflow-x: hidden;
+  }
+}
+
+.sidebar--collapsed + .main-layout__content,
+.sidebar--collapsed ~ .main-layout__content {
+  margin-left: $sidebar-collapsed-width;
+}
+
+@media (max-width: $breakpoint-lg) {
+  .main-layout__content {
+    margin-left: $sidebar-collapsed-width;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .main-layout__content {
+    margin-left: 0 !important;
+  }
+  .main-layout__main {
+    padding: $space-4;
+  }
+}
+
+// App shell: solo el área de contenido realiza scroll.
+html, body, #root { height: 100%; overflow: hidden; }
+.main-layout { height: 100dvh; min-height: 0; overflow: hidden; }
+.main-layout__content { height: 100dvh; min-height: 0; overflow: hidden; }
+.main-layout__main { min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-gutter: stable; }

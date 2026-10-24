@@ -1,0 +1,14 @@
+@use '../abstracts/tokens' as *;
+
+.confirm-dialog__content { display: grid; grid-template-columns: auto 1fr; gap: $space-3; align-items: start; }
+.confirm-dialog__icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: $radius-full; background: rgba($color-primary, .10); color: $color-primary; }
+.confirm-dialog__content--danger .confirm-dialog__icon { background: rgba($color-danger, .10); color: $color-danger; }
+.confirm-dialog__content--warning .confirm-dialog__icon { background: rgba($color-warning, .12); color: $color-warning-dark; }
+.confirm-dialog__content--info .confirm-dialog__icon { background: rgba($color-info, .10); color: $color-info-dark; }
+.confirm-dialog__message { margin: 0; color: $text-secondary; font-size: $font-size-sm; line-height: $line-height-relaxed; }
+.confirm-dialog__confirm { display: inline-flex; align-items: center; gap: $space-2; }
+.confirm-dialog__confirm--danger { background: $color-danger !important; border-color: $color-danger !important; color: $white !important; &:hover:not(:disabled) { background: $color-danger-dark !important; border-color: $color-danger-dark !important; } }
+.confirm-dialog__confirm--warning { background: $color-warning !important; border-color: $color-warning !important; color: $white !important; &:hover:not(:disabled) { background: $color-warning-dark !important; border-color: $color-warning-dark !important; } }
+.confirm-dialog__confirm--info { background: $color-primary !important; border-color: $color-primary !important; color: $white !important; &:hover:not(:disabled) { background: $color-primary-dark !important; border-color: $color-primary-dark !important; } }
+.confirm-dialog__spinner { width: 15px; height: 15px; border: 2px solid rgba($white, .45); border-top-color: $white; border-radius: 50%; animation: confirm-dialog-spin .7s linear infinite; }
+@keyframes confirm-dialog-spin { to { transform: rotate(360deg); } }

@@ -1,0 +1,29 @@
+@use "../abstracts/tokens" as *;
+
+.ui-loading,
+.ui-empty,
+.ui-error {
+  min-height: 160px;
+  display: grid;
+  place-items: center;
+  padding: $space-6;
+  color: $text-muted;
+  font-size: 13px;
+  text-align: center;
+}
+.ui-error {
+  color: $color-danger;
+}
+.ui-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid $border-color;
+  border-top-color: $color-primary;
+  border-radius: 50%;
+  animation: ui-spin 0.7s linear infinite;
+}
+@keyframes ui-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,700 @@
+@use '../abstracts/tokens' as *;
+
+.profile-page {
+  padding: 24px;
+  min-height: 100vh;
+  background: $bg-page;
+
+  &__header {
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: $color-gray-500;
+    margin: 0;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid $color-gray-200;
+    padding-bottom: 0;
+  }
+
+  &__content {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid $color-gray-200;
+    overflow: hidden;
+  }
+}
+
+// Tabs
+.profile-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: $color-gray-500;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+
+  svg {
+    transition: color 0.2s;
+  }
+
+  &:hover {
+    color: $primary;
+    
+    svg {
+      color: $primary;
+    }
+  }
+
+  &--active {
+    color: $primary;
+    
+    svg {
+      color: $primary;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: $primary;
+      border-radius: 2px;
+    }
+  }
+}
+
+// Profile Info
+.profile-info {
+  display: flex;
+  gap: 32px;
+  padding: 32px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__avatar-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($primary-dark, 0.1) 100%);
+
+    &:hover .profile-info__avatar-overlay {
+      opacity: 1;
+    }
+  }
+
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 600;
+    color: $primary;
+  }
+
+  &__avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+
+    svg {
+      color: white;
+    }
+
+    span {
+      font-size: 12px;
+    }
+  }
+
+  &__avatar-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__edit-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid $color-gray-200;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $color-gray-500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      border-color: $primary;
+      color: $primary;
+      background: rgba($primary, 0.05);
+    }
+  }
+
+  &__details {
+    flex: 1;
+  }
+
+  &__section {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $color-gray-100;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: $primary;
+      border-radius: 2px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-gray-400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__value {
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-gray-900;
+  }
+
+  &__role-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &--admin {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+    }
+
+    &--super_admin {
+      background: rgba($color-secondary, 0.1);
+      color: $color-secondary;
+    }
+
+    &--manager {
+      background: rgba($color-warning, 0.1);
+      color: $color-warning;
+    }
+
+    &--user {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+    }
+
+    &--default {
+      background: rgba($color-gray-500, 0.1);
+      color: $color-gray-500;
+    }
+  }
+
+  &__status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &--active {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+    }
+
+    &--inactive {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+    }
+  }
+
+  &__plan {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    background: $color-gray-50;
+    border-radius: 12px;
+  }
+
+  &__plan-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba($primary, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary;
+  }
+
+  &__plan-info {
+    flex: 1;
+  }
+
+  &__plan-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin-bottom: 12px;
+  }
+
+  &__plan-features,
+  &__plan-limits {
+    margin-top: 8px;
+  }
+
+  &__plan-features-label,
+  &__plan-limits-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-gray-500;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &__plan-features-list,
+  &__plan-limits-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__plan-feature,
+  &__plan-limit {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: white;
+    border-radius: 6px;
+    font-size: 12px;
+    color: $color-gray-700;
+
+    svg {
+      color: $color-success;
+    }
+  }
+}
+
+// Profile Form
+.profile-form {
+  padding: 32px;
+
+  &__section {
+    margin-bottom: 32px;
+  }
+
+  &__section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: $primary;
+      border-radius: 2px;
+    }
+  }
+
+  &__field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: $color-gray-700;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid $color-gray-200;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    }
+
+    &--error {
+      border-color: $color-danger;
+      
+      &:focus {
+        box-shadow: 0 0 0 3px rgba($color-danger, 0.1);
+      }
+    }
+  }
+
+  &__password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      padding-right: 40px;
+    }
+  }
+
+  &__password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-gray-400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  &__error {
+    font-size: 12px;
+    color: $color-danger;
+    margin-top: 4px;
+    display: block;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid $color-gray-200;
+  }
+
+  &__btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &--primary {
+      background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+      color: white;
+      border: none;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba($primary, 0.2);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    &--secondary {
+      background: white;
+      border: 1px solid $color-gray-200;
+      color: $color-gray-500;
+
+      &:hover:not(:disabled) {
+        background: $color-gray-50;
+        border-color: $color-gray-300;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+    margin-right: 8px;
+  }
+
+  &__required {
+    color: $color-danger;
+    margin-left: 4px;
+  }
+}
+
+// Error State
+.profile-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: $bg-page;
+
+  &__content {
+    text-align: center;
+    max-width: 400px;
+    padding: 48px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
+
+    svg {
+      width: 80px;
+      height: 80px;
+      color: $color-warning;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: $color-gray-900;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      color: $color-gray-500;
+      margin: 0;
+    }
+  }
+}
+
+// Skeleton
+.profile-skeleton {
+  padding: 24px;
+
+  &__header {
+    margin-bottom: 32px;
+  }
+
+  &__line {
+    height: 24px;
+    background: linear-gradient(90deg, $color-gray-200 0%, $color-gray-100 50%, $color-gray-200 100%);
+    background-size: 200% 100%;
+    border-radius: 8px;
+    animation: shimmer 1.5s infinite;
+
+    &--title {
+      width: 200px;
+      margin-bottom: 8px;
+    }
+
+    &--subtitle {
+      width: 150px;
+      height: 20px;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  &__tab {
+    width: 100px;
+    height: 40px;
+    background: $color-gray-200;
+    border-radius: 8px;
+  }
+
+  &__content {
+    display: flex;
+    gap: 32px;
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  &__avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__avatar-circle {
+    width: 120px;
+    height: 120px;
+    background: $color-gray-200;
+    border-radius: 50%;
+  }
+
+  &__avatar-btn {
+    width: 100px;
+    height: 36px;
+    background: $color-gray-200;
+    border-radius: 8px;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__section {
+    margin-bottom: 32px;
+  }
+
+  &__section-title {
+    width: 150px;
+    height: 20px;
+    background: $color-gray-200;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  &__item {
+    height: 50px;
+    background: $color-gray-200;
+    border-radius: 8px;
+  }
+}
+
+// Animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

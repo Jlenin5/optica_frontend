@@ -1,0 +1,88 @@
+import type { User } from "../types/users.types"
+
+export let mockUsers: User[] = [
+  {
+    id: 1,
+    username: "optica",
+    email: "admin@optica.com",
+    password: "password",
+    name: "Alberto",
+    role_id: 1,
+    role: {
+      id: 1,
+      name: "SUPER_ADMIN", 
+      description: "Super Administrator with full access" 
+    },
+    permissions: ["*"],
+    company_id: 1,
+    branch_id: 1,
+    roles: [],
+    status: true,
+    is_staff: false,
+    is_superuser: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    username: "recepcionista",
+    email: "recepcion@optica.com",
+    password: "password",
+    name: "María",
+    role_id: 3,
+    role: {
+      id: 3,
+      name: "RECEPTIONIST", 
+      description: "Receptionist" 
+    },
+    permissions: ["customers.read", "appointments.create"],
+    company_id: 1,
+    branch_id: 1,
+    roles: [],
+    status: true,
+    is_staff: false,
+    is_superuser: false,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 3,
+    username: "vendedor",
+    email: "vendedor@optica.com",
+    password: "password",
+    name: "Stephanie",
+    role_id: 4,
+    role: {
+      id: 4,
+      name: "SELLER", 
+      description: "Sales person" 
+    },
+    permissions: ["sales.read", "sales.create"],
+    company_id: 1,
+    branch_id: 1,
+    roles: [],
+    status: true,
+    is_staff: false,
+    is_superuser: false,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 4,
+    username: "admin",
+    email: "admin_sucursal@optica.com",
+    password: "password",
+    name: "Pedro",
+    role_id: 2,
+    role: {
+      id: 2,
+      name: "ADMIN", 
+      description: "Branch Administrator" 
+    },
+    permissions: ["*"],
+    company_id: 1,
+    branch_id: 1,
+    roles: [],
+    status: true,
+    is_staff: true,
+    is_superuser: false,
+    created_at: new Date().toISOString(),
+  },
+]

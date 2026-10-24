@@ -1,0 +1,674 @@
+@use '../abstracts/tokens' as *;
+
+.roles-page {
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__header-left {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1E3A8A 0%, $color-primary 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+  }
+
+  &__subtitle {
+    color: $color-gray-500;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  &__form-column {
+    animation: slideInRight 0.3s ease;
+  }
+
+  &__table-column {
+    min-width: 0;
+    animation: slideInLeft 0.3s ease;
+  }
+
+  &__error {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    .error-icon {
+      width: 48px;
+      height: 48px;
+      color: $color-danger;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1F2937;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $color-gray-500;
+      margin-bottom: 1.5rem;
+    }
+
+    .retry-btn {
+      padding: 0.5rem 1.5rem;
+      background: $color-primary;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #2563EB;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+// Form Card
+.roles-form-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: fit-content;
+
+  &:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  &__header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+  }
+
+  &__body {
+    padding: 1.5rem;
+  }
+}
+
+// Table Card
+.roles-table-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: calc(95vh - 6rem);
+
+  &__header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1E3A8A 0%, $color-primary 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+  }
+
+  &__badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: white;
+  }
+
+  &__add-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+  }
+
+  &__search {
+    position: relative;
+    max-width: 300px;
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: white;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.625rem 2rem 0.625rem 2.5rem;
+      border: 1px solid $color-gray-200;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      &::placeholder {
+        color: white;
+      }
+
+      &[type="text"] {
+        color: white;
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+    overflow: auto;
+    padding: 1.5rem;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid $color-gray-200;
+
+    .pagination-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: white;
+      border: 1px solid $color-gray-200;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: $color-gray-700;
+      transition: all 0.2s;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      &:hover:not(:disabled) {
+        background: $color-gray-50;
+        border-color: #D1D5DB;
+        transform: translateY(-1px);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .pagination-pages {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .pagination-page {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $color-gray-200;
+      background: white;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: $color-gray-700;
+      transition: all 0.2s;
+
+      &:hover:not(:disabled) {
+        background: $color-gray-50;
+        border-color: #D1D5DB;
+      }
+
+      &.active {
+        background: $color-primary;
+        border-color: $color-primary;
+        color: white;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Loading State
+.roles-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid $color-gray-200;
+    border-top-color: $color-primary;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  p {
+    color: $color-gray-500;
+    font-size: 0.875rem;
+  }
+}
+
+// Animations
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .roles-page {
+    padding: 1rem;
+  }
+
+  .roles-table-card {
+    height: auto;
+  }
+
+  .roles-table-card__pagination {
+    flex-direction: column;
+    align-items: stretch;
+
+    .pagination-pages {
+      order: -1;
+      justify-content: center;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+.role-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $color-gray-700;
+  }
+
+  &__required {
+    color: $color-danger;
+    margin-left: 0.25rem;
+  }
+
+  &__input,
+  &__textarea {
+    padding: 0.625rem 0.875rem;
+    border: 1px solid $color-gray-200;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    &--error {
+      border-color: $color-danger;
+      
+      &:focus {
+        border-color: $color-danger;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      }
+    }
+  }
+
+  &__textarea {
+    resize: none;
+    min-height: 140px;
+  }
+
+  &__error {
+    font-size: 0.75rem;
+    color: $color-danger;
+    margin-top: 0.25rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid $color-gray-100;
+  }
+
+  &__button {
+    flex: 1;
+    padding: 0.625rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &--primary {
+      background: linear-gradient(135deg, $color-primary 0%, #2563EB 100%);
+      color: white;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &--secondary {
+      background: $color-gray-100;
+      color: $color-gray-700;
+
+      &:hover {
+        background: $color-gray-200;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+.role-table {
+  overflow-x: auto;
+  flex: 1;
+
+  &__content {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__header {
+    background: $color-gray-50;
+    border-bottom: 2px solid $color-gray-200;
+  }
+
+  &__th {
+    text-align: left;
+    padding: 1rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $color-gray-500;
+    
+    &--actions {
+      text-align: center;
+      width: 100px;
+    }
+  }
+
+  &__row {
+    border-bottom: 1px solid $color-gray-100;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $color-gray-50;
+    }
+  }
+
+  &__td {
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: #1F2937;
+    vertical-align: middle;
+
+    &--name {
+      font-weight: 500;
+    }
+
+    &--description {
+      color: $color-gray-500;
+      max-width: 550px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &--actions {
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #EFF6FF;
+    color: #1E40AF;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: monospace;
+  }
+
+  &__action {
+    background: none;
+    border: none;
+    font-size: 1.125rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin: 0 0.25rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+
+    &--edit {
+      color: $color-primary;
+      
+      &:hover {
+        background: #EFF6FF;
+        transform: scale(1.1);
+      }
+    }
+
+    &--delete {
+      color: $color-danger;
+      
+      &:hover {
+        background: #FEF2F2;
+        transform: scale(1.1);
+      }
+    }
+
+    &--confirm {
+      color: #10B981;
+      
+      &:hover {
+        background: #D1FAE5;
+      }
+    }
+
+    &--cancel {
+      color: $color-danger;
+      
+      &:hover {
+        background: #FEF2F2;
+      }
+    }
+  }
+
+  &__confirm {
+    display: inline-flex;
+    gap: 0.25rem;
+    animation: fadeIn 0.2s ease;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    color: $color-gray-500;
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    span {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

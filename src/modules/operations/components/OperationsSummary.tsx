@@ -1,0 +1,2 @@
+import type { OperationalStatus } from '../types/operations.types'
+export const OperationsSummary = ({ statuses }: { statuses: OperationalStatus[] }) => <div className="operational-kpis"><div><span>Total</span><strong>{statuses.length}</strong></div><div><span>Pendientes</span><strong>{statuses.filter(s=>s==='Pendiente').length}</strong></div><div><span>En proceso</span><strong>{statuses.filter(s=>s==='En proceso').length}</strong></div><div><span>Listos</span><strong>{statuses.filter(s=>s==='Listo'||s==='Completado').length}</strong></div></div>

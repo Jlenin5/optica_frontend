@@ -1,0 +1,203 @@
+@use '../abstracts/tokens' as *;
+
+.prescription-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+    color: $color-gray-400;
+    background: $color-gray-50;
+    border-radius: 16px;
+
+    svg {
+      margin-bottom: 16px;
+      color: $color-gray-300;
+    }
+
+    p {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-gray-500;
+    }
+  }
+
+  &__empty-hint {
+    font-size: 12px;
+    color: $color-gray-400;
+    font-weight: normal;
+  }
+
+  &__item {
+    background: $color-gray-50;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    border: 1px solid $color-gray-200;
+
+    &:hover {
+      background: $color-gray-100;
+      transform: translateX(4px);
+      border-color: $primary;
+    }
+  }
+
+  &__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__item-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: $color-gray-500;
+
+    svg {
+      color: $primary;
+    }
+  }
+
+  &__item-badges {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 500;
+
+    &--appointment {
+      background: rgba($color-secondary, 0.1);
+      color: $color-secondary;
+    }
+
+    &--active {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+    }
+
+    &--inactive {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+    }
+  }
+
+  &__item-content {
+    margin-bottom: 12px;
+  }
+
+  &__prescription-data {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__eye {
+    font-size: 13px;
+    color: $color-gray-700;
+    font-family: monospace;
+
+    strong {
+      font-weight: 600;
+      color: $color-gray-900;
+      font-family: inherit;
+    }
+  }
+
+  &__notes {
+    font-size: 12px;
+    color: $color-gray-500;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed $color-gray-200;
+    font-style: italic;
+  }
+
+  &__item-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    button {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: none;
+      background: rgba($primary, 0.1);
+      color: $primary;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+
+      &:hover {
+        background: rgba($primary, 0.2);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+// Responsive para PrescriptionList
+@media (max-width: 768px) {
+  .prescription-list {
+    gap: 12px;
+
+    &__item {
+      padding: 12px;
+    }
+
+    &__item-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__prescription-data {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &__eye {
+      font-size: 12px;
+    }
+
+    &__item-actions {
+      margin-top: 8px;
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .prescription-list {
+    &__empty {
+      padding: 32px 16px;
+    }
+
+    &__item-badges {
+      flex-wrap: wrap;
+    }
+  }
+}

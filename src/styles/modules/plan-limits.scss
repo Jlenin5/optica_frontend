@@ -1,0 +1,725 @@
+// styles/plan-limits.scss
+@use '../abstracts/tokens' as *;
+
+.plan-limits-page {
+  padding: 24px;
+  background: $bg-page;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid $color-gray-200;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: $color-gray-500;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      background: $primary;
+      color: white;
+      border-color: $primary;
+      transform: translateX(-2px);
+    }
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: $color-gray-500;
+    margin: 0;
+  }
+
+  &__add-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba($primary, 0.2);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba($primary, 0.3);
+    }
+  }
+
+  &__add-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  &__stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid $color-gray-200;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.1);
+      border-color: transparent;
+    }
+  }
+
+  &__stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &--total {
+      background: rgba($color-primary, 0.1);
+      color: $color-primary;
+    }
+
+    &--configured {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+    }
+
+    &--pending {
+      background: rgba($color-warning, 0.1);
+      color: $color-warning;
+    }
+  }
+
+  &__stat-info {
+    flex: 1;
+  }
+
+  &__stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: $color-gray-500;
+    margin: 0 0 4px 0;
+  }
+
+  &__stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-gray-900;
+    margin: 0;
+  }
+
+  &__content {
+    margin-top: 24px;
+  }
+}
+
+// Plan Limits Table
+.plan-limits-table-container {
+  background: white;
+  border-radius: 16px;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.plan-limits-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: $color-gray-50;
+    border-bottom: 1px solid $color-gray-200;
+
+    th {
+      padding: 16px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: $color-gray-500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $color-gray-100;
+      transition: background 0.2s;
+
+      &:hover {
+        background: $color-gray-50;
+      }
+    }
+
+    td {
+      padding: 16px;
+      font-size: 14px;
+      color: $color-gray-700;
+    }
+  }
+
+  &__limit-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__limit-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba($primary, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary;
+  }
+
+  &__limit-name {
+    font-weight: 600;
+    color: $color-gray-900;
+    margin-bottom: 2px;
+  }
+
+  &__limit-code {
+    font-size: 11px;
+    color: $color-gray-400;
+  }
+
+  &__code {
+    code {
+      background: $color-gray-100;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: monospace;
+      color: $primary;
+    }
+  }
+
+  &__value-display {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  &__value-text {
+    font-weight: 500;
+    color: $color-gray-900;
+
+    &--empty {
+      color: $color-gray-400;
+      font-style: italic;
+    }
+  }
+
+  &__value-unit {
+    font-size: 12px;
+    color: $color-gray-500;
+  }
+
+  &__value-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__value-input {
+    width: 100px;
+    padding: 6px 8px;
+    border: 1px solid $primary;
+    border-radius: 6px;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($primary, 0.2);
+    }
+  }
+
+  &__value-save,
+  &__value-cancel {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__value-save {
+    background: rgba($color-success, 0.1);
+    color: $color-success;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-success, 0.2);
+    }
+  }
+
+  &__value-cancel {
+    background: rgba($color-danger, 0.1);
+    color: $color-danger;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-danger, 0.2);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  &__action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &--edit {
+      background: rgba($primary, 0.1);
+      color: $primary;
+
+      &:hover {
+        background: rgba($primary, 0.2);
+        transform: scale(1.05);
+      }
+    }
+
+    &--delete {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+
+      &:hover {
+        background: rgba($color-danger, 0.2);
+        transform: scale(1.05);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+}
+
+// Assign Limit Modal
+
+
+
+
+// Empty State
+.plan-limits-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  padding: 48px;
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    color: $color-gray-300;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-gray-900;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $color-gray-500;
+    margin: 0 0 24px 0;
+  }
+
+  &__button {
+    padding: 10px 24px;
+    background: $primary;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $primary-dark;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Skeleton
+.plan-limits-skeleton {
+  padding: 24px;
+
+  &__header {
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    width: 300px;
+    height: 36px;
+    background: $color-gray-200;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    width: 200px;
+    height: 20px;
+    background: $color-gray-200;
+    border-radius: 4px;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  &__stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid $color-gray-200;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  &__stat-icon {
+    width: 48px;
+    height: 48px;
+    background: $color-gray-200;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__stat-line {
+    height: 16px;
+    background: $color-gray-200;
+    border-radius: 4px;
+    margin-bottom: 8px;
+
+    &:last-child {
+      width: 60%;
+    }
+  }
+
+  &__table {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid $color-gray-200;
+  }
+
+  &__table-header {
+    padding: 16px;
+    background: $color-gray-50;
+    border-bottom: 1px solid $color-gray-200;
+    display: flex;
+    gap: 16px;
+  }
+
+  &__table-header-cell {
+    height: 20px;
+    background: $color-gray-200;
+    border-radius: 4px;
+    flex: 1;
+  }
+
+  &__table-row {
+    padding: 16px;
+    border-bottom: 1px solid $color-gray-100;
+    display: flex;
+    gap: 16px;
+  }
+
+  &__table-cell {
+    height: 40px;
+    background: $color-gray-200;
+    border-radius: 4px;
+    flex: 1;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .plan-limits-page {
+    padding: 16px;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__header-left {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__add-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .plan-limits-table {
+    font-size: 13px;
+
+    th, td {
+      padding: 12px;
+    }
+  }
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.plan-limits-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: $bg-page;
+
+  &__content {
+    text-align: center;
+    max-width: 400px;
+    padding: 48px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
+
+    svg {
+      width: 80px;
+      height: 80px;
+      color: $color-warning;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: $color-gray-900;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      color: $color-gray-500;
+      margin: 0 0 24px 0;
+    }
+
+    button {
+      padding: 10px 24px;
+      background: $primary;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: $primary-dark;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Mejorar estadísticas
+.plan-limits-page__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.plan-limits-page__stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid $color-gray-200;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+  }
+}
+
+.plan-limits-page__stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &--total {
+    background: rgba(59, 130, 246, 0.1);
+    color: $color-primary;
+  }
+
+  &--configured {
+    background: rgba(16, 185, 129, 0.1);
+    color: $color-success;
+  }
+
+  &--pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: $color-warning;
+  }
+}
+
+.plan-limits-page__stat-info {
+  flex: 1;
+}
+
+.plan-limits-page__stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: $color-gray-500;
+  margin: 0 0 4px 0;
+}
+
+.plan-limits-page__stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: $color-gray-900;
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Estilo para página solo con modal
+.plan-limits-page--modal-only {
+  .plan-limits-page__header {
+    margin-bottom: 0;
+    padding: 24px;
+    background: white;
+    border-bottom: 1px solid $color-gray-200;
+  }
+
+  .plan-limits-page__content {
+    display: none;
+  }
+}

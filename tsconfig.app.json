@@ -1,0 +1,109 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@auth/*": [
+        "./src/modules/auth/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@config/*": [
+        "./src/app/config/*"
+      ],
+      "@roles/*": [
+        "./src/modules/roles/*"
+      ],
+      "@users/*": [
+        "./src/modules/users/*"
+      ],
+      "@appointments/*": [
+        "./src/modules/clinical/appointments/*"
+      ],
+      "@patients/*": [
+        "./src/modules/clinical/patients/*"
+      ],
+      "@prescriptions/*": [
+        "./src/modules/clinical/prescriptions/*"
+      ],
+      "@companies/*": [
+        "./src/modules/organizations/companies/*"
+      ],
+      "@branch-offices/*": [
+        "./src/modules/organizations/branch-offices/*"
+      ],
+      "@warehouses/*": [
+        "./src/modules/organizations/warehouses/*"
+      ],
+      "@stores/*": [
+        "./src/modules/organizations/stores/*"
+      ],
+      "@categories/*": [
+        "./src/modules/inventory/categories/*"
+      ],
+      "@brands/*": [
+        "./src/modules/inventory/brands/*"
+      ],
+      "@products/*": [
+        "./src/modules/inventory/products/*"
+      ],
+      "@currencies/*": [
+        "./src/modules/finance/accounting/currencies/*"
+      ],
+      "@banks/*": [
+        "./src/modules/finance/banking/banks/*"
+      ],
+      "@receipts/*": [
+        "./src/modules/documents/receipts/*"
+      ],
+      "@type-of-documents/*": [
+        "./src/modules/documents/type-of-documents/*"
+      ],
+      "@plans/*": [
+        "./src/modules/billing/plans/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2023",
+    "useDefineForClassFields": true,
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/global.d.ts",
+    "tailwind.config.ts",
+    "vite.config.mts",
+    "vite-env.d.ts"
+  ]
+}

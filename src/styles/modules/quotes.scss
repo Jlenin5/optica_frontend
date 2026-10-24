@@ -1,0 +1,509 @@
+@use '../abstracts/tokens' as *;
+
+.quote-form-page {
+  &__eyebrow {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $text-secondary;
+    margin-bottom: 2px;
+  }
+
+  &__close {
+    margin-left: auto;
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-secondary;
+    cursor: pointer;
+    &:hover { background: $bg-subtle; color: $text-primary; }
+  }
+
+  &__status-pill {
+    margin-left: $space-3;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    background: $bg-subtle;
+    color: $text-secondary;
+    &--aceptada, &--enviada { background: rgba($color-primary, 0.12); color: $color-primary-dark; }
+    &--convertida, &--pedido { background: rgba($color-success, 0.15); color: $color-success-dark; }
+    &--cancelado, &--rechazada { background: rgba($color-danger, 0.12); color: $color-danger-dark; }
+    &--borrador, &--pendiente { background: rgba($color-warning, 0.15); color: $color-warning-darker; }
+  }
+
+  &__readonly-banner {
+    max-width: 1400px;
+    margin: 0 auto $space-4;
+    padding: $space-3 $space-4;
+    border-radius: $radius-md;
+    background: #eff6ff;
+    color: $color-primary-darker;
+    font-size: $font-size-sm;
+    border: 1px solid rgba($color-primary, 0.25);
+  }
+
+  &__loading {
+    padding: $space-10;
+    text-align: center;
+    color: $text-secondary;
+  }
+
+  &__grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: $space-4;
+    margin-bottom: $space-4;
+    @media (max-width: $breakpoint-lg) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: $breakpoint-sm) { grid-template-columns: 1fr; }
+  }
+
+  &__grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-4;
+    @media (max-width: $breakpoint-md) { grid-template-columns: 1fr; }
+  }
+
+  &__field-relative { position: relative; }
+
+  &__dropdown {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 260px;
+    overflow: auto;
+    margin: 0;
+    padding: $space-1;
+    list-style: none;
+    background: $bg-surface;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+
+    &--wide { min-width: 360px; }
+
+    li button {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: $space-3;
+      padding: $space-2 $space-3;
+      border: 0;
+      border-radius: $radius-sm;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      &:hover { background: $bg-subtle; }
+      strong { display: block; font-size: $font-size-sm; }
+      span { display: block; font-size: $font-size-xs; color: $text-secondary; }
+    }
+
+    &-empty {
+      padding: $space-3;
+      font-size: $font-size-sm;
+      color: $text-secondary;
+    }
+  }
+
+  &__price-type-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: $space-3;
+    margin-bottom: $space-4;
+    flex-wrap: wrap;
+  }
+
+  &__price-hint { font-size: $font-size-xs; color: $text-secondary; }
+
+  &__price-types {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-3;
+    &--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: repeat(2, 1fr);
+      &--4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+      &--4 { grid-template-columns: 1fr; }
+    }
+  }
+
+  &__price-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: $space-4;
+    border: 1.5px solid $border-color;
+    border-radius: $radius-lg;
+    background: $bg-surface;
+    cursor: pointer;
+    transition: $transition-fast;
+    text-align: left;
+    &:hover:not(:disabled) { border-color: rgba($color-primary, 0.45); }
+    &:disabled { opacity: 0.7; cursor: not-allowed; }
+    &.is-active {
+      border-color: $color-primary;
+      background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba($color-primary, 0.28);
+      .quote-form-page__price-sub { color: rgba(255, 255, 255, 0.9); }
+    }
+  }
+
+  &__price-label { font-weight: $font-weight-semibold; font-size: $font-size-sm; }
+  &__price-sub { font-size: $font-size-xs; color: $text-secondary; }
+
+  &__products-toolbar {
+    display: flex;
+    align-items: flex-end;
+    gap: $space-4;
+    margin-bottom: $space-4;
+  }
+
+  &__product-search {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: 0 $space-3;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    input {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 10px 0;
+      outline: none;
+    }
+  }
+
+  &__products-count {
+    white-space: nowrap;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    padding: 10px 14px;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-subtle;
+  }
+
+  &__empty-products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    padding: $space-10 $space-4;
+    color: $text-secondary;
+    border: 1px dashed $border-color;
+    border-radius: $radius-lg;
+    background: $bg-subtle;
+    p { margin: 0; font-weight: $font-weight-semibold; color: $text-primary; }
+    span { font-size: $font-size-sm; }
+  }
+
+  &__lines {
+    overflow-x: auto;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: $font-size-sm;
+      th {
+        text-align: left;
+        padding: $space-2 $space-3;
+        border-bottom: 1px solid $border-color;
+        color: $text-secondary;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-xs;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      td {
+        padding: $space-2 $space-3;
+        border-bottom: 1px solid $border-color;
+        vertical-align: middle;
+        input[type='number'] {
+          width: 88px;
+          padding: 6px 8px;
+          border: 1px solid $border-color;
+          border-radius: $radius-sm;
+        }
+        strong { display: block; }
+      }
+    }
+  }
+
+  &__sku { display: block; font-size: $font-size-xs; color: $text-secondary; }
+  &__price { font-weight: $font-weight-semibold; white-space: nowrap; }
+
+  &__lab-tag {
+    display: inline-block;
+    margin-top: 2px;
+    margin-right: 4px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba($color-secondary, 0.12);
+    color: $color-secondary-dark;
+  }
+
+  &__remove {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: $radius-sm;
+    background: transparent;
+    color: $text-secondary;
+    cursor: pointer;
+    &:hover { background: rgba($color-danger, 0.08); color: $color-danger; }
+  }
+
+  &__summary {
+    h3 { margin: 0 0 $space-3; font-size: $font-size-lg; }
+  }
+  &__summary-company { font-size: $font-size-sm; color: $text-secondary; margin-bottom: $space-2; }
+  &__summary-price-label {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $color-primary-dark;
+    margin-bottom: $space-4;
+  }
+
+  &__discount-input input {
+    width: 96px;
+    text-align: right;
+    padding: 4px 8px;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+  }
+
+  &__igv-tag {
+    display: inline-flex;
+    margin-top: $space-2;
+    padding: 4px 10px;
+    border-radius: $radius-sm;
+    background: $color-primary;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    &.is-sf { background: $color-gray-500; }
+  }
+
+  &__validity {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-top: $space-4;
+    padding: $space-3;
+    border-radius: $radius-md;
+    background: #eff6ff;
+    color: $color-primary-darker;
+    font-size: $font-size-sm;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $space-3;
+    margin-top: $space-4;
+    &--stack { flex-direction: column; }
+  }
+
+  &__btn-secondary {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background: $bg-surface;
+    color: $text-primary;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    &:hover:not(:disabled) { background: $bg-subtle; }
+    &:disabled { opacity: 0.55; cursor: not-allowed; }
+  }
+
+  &__btn-primary {
+    flex: 1.4;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: $radius-md;
+    background: $color-primary;
+    color: #fff;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba($color-primary, 0.3);
+    &:hover:not(:disabled) { background: $color-primary-dark; }
+    &:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: none; }
+  }
+}
+
+.quotes-page {
+  &__loading, &__empty {
+    padding: $space-8;
+    text-align: center;
+    color: $text-secondary;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $space-1;
+    align-items: center;
+    position: relative;
+    button {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: $radius-sm;
+      background: transparent;
+      color: $text-secondary;
+      cursor: pointer;
+      &:hover { background: $bg-subtle; color: $text-primary; }
+    }
+  }
+
+  &__menu-wrap { position: relative; }
+
+  &__menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 4px);
+    z-index: 40;
+    min-width: 220px;
+    padding: $space-1;
+    background: $bg-surface;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    button {
+      width: 100%;
+      display: flex !important;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 8px;
+      height: auto !important;
+      padding: 10px 12px !important;
+      border-radius: $radius-sm;
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-primary;
+      text-align: left;
+      white-space: nowrap;
+
+      &.is-primary {
+        color: $color-primary-dark;
+        &:hover { background: rgba($color-primary, 0.1); }
+      }
+      &.is-danger {
+        color: $color-danger-dark;
+        &:hover { background: rgba($color-danger, 0.08); }
+      }
+    }
+  }
+
+  &__menu-empty {
+    padding: 10px 12px;
+    font-size: 12px;
+    color: $text-secondary;
+  }
+
+  &__menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    border: 0;
+    background: transparent;
+    cursor: default;
+  }
+}
+
+.sale-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font: inherit;
+    background: #fff;
+    outline: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: $color-primary-light;
+  }
+
+  input:disabled, select:disabled, textarea:disabled {
+    background: $bg-subtle;
+    color: $text-secondary;
+  }
+}
+
+.sale-form__notes-card {
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  textarea {
+    width: 100%;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font: inherit;
+    resize: vertical;
+  }
+}
+
+.sale-form__total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 13px;
+  border-bottom: 1px solid $border-color;
+
+  &--grand {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-bottom: 0;
+    font-size: 16px;
+    strong { font-size: 20px; color: $color-primary-darker; }
+  }
+}
+
+.required { color: $color-danger; }
