@@ -10,7 +10,7 @@ export default defineConfig({
 		}),
 		tailwindcss(),
   ],
-	base: "/optica_frontend",
+	base: "/optica_frontend/",
   resolve: {
 		alias: {
 			'@': '/src',
