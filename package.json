@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "set CACHE_DIR=C:\\Temp && gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
